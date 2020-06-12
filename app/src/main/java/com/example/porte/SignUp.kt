@@ -27,8 +27,7 @@ class SignUp : AppCompatActivity() {
 
         // 이메일 입력 완료 시 중복되는 이메일이 있는지 확인.
         email_edit_tv.setOnFocusChangeListener { v: View?, hasFocus: Boolean ->
-            // 입력을 마쳤을 경우
-            if (!hasFocus) {
+            if (!hasFocus) { // 입력을 마쳤을 경우
                 val email = email_edit_tv.text.toString()
                 if (email.isNotEmpty() && email != null) {
                     auth.fetchSignInMethodsForEmail(email).addOnCompleteListener { task ->
@@ -37,6 +36,7 @@ class SignUp : AppCompatActivity() {
 
                             if (isNewUser!!) {
                                 email_error_tv.visibility = View.INVISIBLE
+                                email_confirmed_img.visibility = View.VISIBLE
                                 Log.d("test", "신규 유저입니다.")
                                 isEmailConfirmed = true
                             }
@@ -51,34 +51,40 @@ class SignUp : AppCompatActivity() {
                         else {
                             email_error_tv.text = "잘못된 이메일 형식입니다."
                             email_error_tv.visibility = View.VISIBLE
+                            email_confirmed_img.visibility = View.INVISIBLE
                         }// END OF if(task.isSuccessful)
                     }//END OF auth.fetchSignInMethodsForEmail
                 } //END OF if (email.isNotEmpty() && email != null)
             }
-            else {
+            else { // 입력을 시작할 경우
                 email_error_tv.visibility = View.INVISIBLE
+                email_confirmed_img.visibility = View.INVISIBLE
             } //END OF if(!hasFocus)
         }
 
-        // 비밀번호가 6자리 이상인지 화
+        // 비밀번호가 6자리 이상인지 확인
         password_edit_tv.setOnFocusChangeListener { v, hasFocus ->
-            // 입력을 마쳤을 경우
-            if(!hasFocus) {
+            if(!hasFocus) { // 입력을 마쳤을 경우
                 // 비밀번호 6자리 이상
                 if (password_edit_tv.text.length >= 6) {
                     Log.d("test", "${password_edit_tv.text.length}")
                     password_error_tv.visibility = View.INVISIBLE
+                    password_confirmed_img.visibility = View.VISIBLE
                     isPasswordConfirmed = true
                 }
                 // 비밀번호 6자리 이하
                 else {
                     password_error_tv.visibility = View.VISIBLE
+                    password_confirmed_img.visibility = View.INVISIBLE
                     isPasswordConfirmed = false
                 }
                 checkAllEditConfirmed()
             }
             else {
+                password_confirmed_img.visibility = View.INVISIBLE
                 password_error_tv.visibility = View.INVISIBLE
+                password_verification_error_tv.visibility = View.INVISIBLE
+                password_verification_confirmed_img.visibility = View.INVISIBLE
             } // END OF if(!hasFocus)
         }// END OF password_verification_error_tv.setOnFocusChangeListener
 
@@ -92,6 +98,7 @@ class SignUp : AppCompatActivity() {
             }
             else {
                 password_verification_error_tv.visibility = View.INVISIBLE
+                password_verification_confirmed_img.visibility = View.INVISIBLE
             }// END OF if(!hasFocus)
         }// END OF password_verification_error_tv.setOnFocusChangeListener
 
@@ -139,11 +146,13 @@ class SignUp : AppCompatActivity() {
         // 비밀번호 일치
         if (password_edit_tv.text.toString() == password_verification_edit_tv.text.toString()) {
             password_verification_error_tv.visibility = View.INVISIBLE
+            password_verification_confirmed_img.visibility = View.VISIBLE
             isPasswordVerificationConfirmed = true
         }
         // 비밀번호 불일치
         else {
             password_verification_error_tv.visibility = View.VISIBLE
+            password_verification_confirmed_img.visibility = View.INVISIBLE
             isPasswordVerificationConfirmed = false
         }
         checkAllEditConfirmed()

@@ -68,17 +68,37 @@
 
                 tools:layout_editor_absoluteX="16dp" />
 
-            <EditText
-                android:id="@+id/email_edit_tv"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:hint="이메일을 입력하세요."
+                android:layout_marginRight="50dp">
 
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="80dp"
-                />
+                <EditText
+                    android:id="@+id/email_edit_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:hint="이메일을 입력하세요."
+
+
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"/>
+
+                <ImageView
+                    android:id="@+id/email_confirmed_img"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_check_circle_black_24dp"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/email_error_tv"
@@ -115,16 +135,36 @@
 
                 tools:layout_editor_absoluteX="16dp" />
 
-            <EditText
-                android:id="@+id/password_edit_tv"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:hint="비밀번호를 입력하세요."
+                android:layout_marginRight="50dp">
 
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="80dp" />
+
+                <EditText
+                    android:id="@+id/password_edit_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+
+                    android:inputType="textPassword"
+                    android:hint="비밀번호를 입력하세요."
+
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"/>
+
+                <ImageView
+                    android:id="@+id/password_confirmed_img"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_check_circle_black_24dp"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/password_error_tv"
@@ -137,6 +177,7 @@
                 android:visibility="invisible"
 
                 tools:layout_editor_absoluteY="111dp" />
+
 
         </LinearLayout>
 
@@ -152,7 +193,7 @@
                 android:id="@+id/password_verification_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호"
+                android:text="비밀번호 확인"
                 android:textColor="@color/colorPrimaryDark"
 
                 android:layout_marginLeft="16dp"
@@ -160,17 +201,36 @@
 
                 tools:layout_editor_absoluteX="16dp" />
 
-            <EditText
-                android:id="@+id/password_verification_edit_tv"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:hint="비밀번호를 한번 더 입력하세요."
-                android:imeOptions="actionDone"
+                android:layout_marginRight="50dp">
 
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="80dp" />
+                <EditText
+                    android:id="@+id/password_verification_edit_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:hint="비밀번호를 한번 더 입력하세요."
+
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"/>
+
+                <ImageView
+                    android:id="@+id/password_verification_confirmed_img"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+
+                    app:srcCompat="@drawable/ic_check_circle_black_24dp"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/password_verification_error_tv"
