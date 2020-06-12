@@ -3,6 +3,9 @@ package com.example.porte
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
@@ -17,28 +20,33 @@ class SignIn : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         signIn_btn.setOnClickListener {
+            Log.d("test", "로그인 버튼")
             val email = email_tv.text.toString()
-            val password = password_tv.toString()
+            val password = password_tv.text.toString()
 
-            if email.isNotEmpty() && email != null {
-                if password.isNotEmpty() && password != null {
+            if (email.isNotEmpty() && email != null) {
+                if (password.isNotEmpty() && password != null) {
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) {task ->
                         if (task.isSuccessful) {
-                            val user = task.result.user
+                            val user = auth.currentUser
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
+                        }
+                        else {
+                            Toast.makeText(this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
                 else {
-
+                    Toast.makeText(this, "아이디와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
             else {
-
+                Toast.makeText(this, "아이디와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
 
         }
+
 
         signUp_btn.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
