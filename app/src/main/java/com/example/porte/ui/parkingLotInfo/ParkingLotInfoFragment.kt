@@ -20,6 +20,8 @@ class ParkingLotInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_parking_lot_info, container, false)
+
+        // Segment Control 초기화
         val segmented: SegmentedButton = root.findViewById(R.id.terminal_segment_control)
         segmented {
             // set initial checked segment (null by default)
@@ -31,7 +33,7 @@ class ParkingLotInfoFragment : Fragment() {
                 listOf("제1터미널", "제2터미널")
             }
 
-            // notifies when segment was checked
+           // notifies when segment was checked
             onSegmentChecked { segment ->
                 Log.d("creageek:segmented", "Segment ${segment.text} checked")
             }
