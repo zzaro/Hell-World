@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "793837388289",
+    "firebase_url": "https://porte-86835.firebaseio.com",
+    "project_id": "porte-86835",
+    "storage_bucket": "porte-86835.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793837388289:android:31613b1c5579bd01bbf600",
+        "android_client_info": {
+          "package_name": "com.example.porte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793837388289-492hgn7f6cebjgfh01e16gqgfui9cc8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIt-XHkMegHhCwswxFUxvAW-TzbeY6tiY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793837388289-492hgn7f6cebjgfh01e16gqgfui9cc8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
