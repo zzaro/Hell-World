@@ -8,16 +8,28 @@
 
     <!-- TODO: Update blank fragment layout -->
     <com.creageek.segmentedbutton.SegmentedButton
-        android:id="@+id/segment_control"
-        android:layout_width="0dp"
+        android:id="@+id/terminal_segment_control"
+        android:orientation="horizontal"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
+        app:spreadType="evenly"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:segmentColor="#2196F3"
-        app:textSize="10dp"/>
+        app:segmentHeight="36dp"
+        android:layout_marginTop="8dp"
+
+        app:segmentColor="#FFFFFF"
+        app:segmentColorChecked="#2196F3"
+        app:textColor="#2196F3"
+        app:textColorChecked="#FFFFFF"
+
+        app:borderColor="#2196F3"
+        app:borderWidth="2dp"
+
+        app:textSize="16dp"/>
 
 
 

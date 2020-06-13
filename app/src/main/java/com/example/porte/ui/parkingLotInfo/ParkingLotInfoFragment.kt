@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.creageek.segmentedbutton.SegmentedButton
 import com.example.porte.R
-import kotlinx.android.synthetic.main.fragment_parking_lot_info.*
 
 /**
  * A simple [Fragment] subclass.
@@ -21,7 +20,7 @@ class ParkingLotInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_parking_lot_info, container, false)
-        val segmented: SegmentedButton = root.findViewById(R.id.segment_control)
+        val segmented: SegmentedButton = root.findViewById(R.id.terminal_segment_control)
         segmented {
             // set initial checked segment (null by default)
             initialCheckedIndex = 0
@@ -29,7 +28,7 @@ class ParkingLotInfoFragment : Fragment() {
             // init with segments programmatically without RadioButton as a child in xml
             initWithItems {
                 // takes only list of strings
-                listOf("Today", "This week", "This month")
+                listOf("제1터미널", "제2터미널")
             }
 
             // notifies when segment was checked
