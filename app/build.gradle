@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.porte"
-        minSdkVersion 16
+        minSdkVersion 21 //segment control 사용을 위해 16에서 21로 변경
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
