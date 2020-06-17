@@ -1,5 +1,6 @@
 package com.example.porte.ui.parkingLotInfo
 
+import android.net.DnsResolver
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.creageek.segmentedbutton.SegmentedButton
 import com.example.porte.R
+import com.example.porte.ValueObject.ParkingLotModel
+import com.example.porte.ValueObject.ParkingLotVO
+import com.example.porte.api_util.ParkingLotAPI
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+//import javax.security.auth.callback.Callback
 
 /**
  * A simple [Fragment] subclass.
@@ -47,10 +55,29 @@ class ParkingLotInfoFragment : Fragment() {
             }
         }
 
+        ParkingLotAPI.getService().getTop(SERVICE_KEY, PAGE_NO, NUM_OF_ROWS)?.enqueue(object : Callback<ParkingLotModel> {
+            override fun onFailure(call: Call<ParkingLotModel>, t: Throwable) {
+                Log.d("AAA", "${t}")
+            }
+
+            override fun onResponse(
+                call: Call<ParkingLotModel>,
+                response: Response<ParkingLotModel>
+            ) {
+                Log.d("AAA", response.body().toString())
+                println(response.body())
+            }
+        })
+
         // Inflate the layout for this fragment
         return root
 
 
-    }
 
+    }
+    companion object {
+        const val SERVICE_KEY = "pgJQkZVlRkVRdW6c0pWRBmu2bTdIQ1FMprnOLoRYLKX%2BHQRPkG%2BlaEJ28smMY0qp3EkcvxqmvjoqADaTBNMD%2FA%3D%3D"
+        const val PAGE_NO = "1"
+        const val NUM_OF_ROWS = "13"
+    }
 }
