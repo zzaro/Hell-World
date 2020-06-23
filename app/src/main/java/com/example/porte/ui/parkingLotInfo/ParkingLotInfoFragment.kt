@@ -19,6 +19,9 @@ import retrofit2.Response
  * A simple [Fragment] subclass.
  */
 class ParkingLotInfoFragment : Fragment() {
+//    private val SERVICE_KEY = "pgJQkZVlRkVRdW6c0pWRBmu2bTdIQ1FMprnOLoRYLKX%2BHQRPkG%2BlaEJ28smMY0qp3EkcvxqmvjoqADaTBNMD%2FA%3D%3D"
+//    private val PAGE_NO = "1"
+//    private val NUM_OF_ROWS = "13"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,7 +78,7 @@ class ParkingLotInfoFragment : Fragment() {
 
     }
     companion object {
-        const val SERVICE_KEY = "pgJQkZVlRkVRdW6c0pWRBmu2bTdIQ1FMprnOLoRYLKX%2BHQRPkG%2BlaEJ28smMY0qp3EkcvxqmvjoqADaTBNMD%2FA%3D%3D"
+        const val SERVICE_KEY = "pgJQkZVlRkVRdW6c0pWRBmu2bTdIQ1FMprnOLoRYLKX\u002BHQRPkG\u002BlaEJ28smMY0qp3EkcvxqmvjoqADaTBNMD\u002FA\u003D\u003D"
         const val PAGE_NO = "1"
         const val NUM_OF_ROWS = "13"
     }

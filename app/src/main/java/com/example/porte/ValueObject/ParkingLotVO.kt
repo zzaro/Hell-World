@@ -6,15 +6,15 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
-@Root(name = "body", strict = true)
+@Root
 data class ParkingLotResponse (
     @field: Element (name = "header", required = false)
     @param: Element (name = "header", required = false)
-    var header: Header
-//
-//    @field: Element (name = "body", required = false)
-//    @param: Element (name = "body", required = false)
-//    var body: Body,
+    var header: Header,
+
+    @field: Element (name = "body", required = false)
+    @param: Element (name = "body", required = false)
+    var body: Body
 //
 //    @field: Element (name = "items", required = false)
 //    @param: Element (name = "items", required = false)
