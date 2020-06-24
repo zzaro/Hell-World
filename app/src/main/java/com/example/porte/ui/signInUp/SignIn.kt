@@ -1,11 +1,12 @@
-package com.example.porte
+package com.example.porte.ui.signInUp
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
+import com.example.porte.MainActivity
+import com.example.porte.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
