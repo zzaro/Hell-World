@@ -1,5 +1,7 @@
-package com.example.porte.api_util
+package com.example.porte.Util
 
+import com.example.porte.ValueObject.DepartureResponse
+import com.example.porte.ValueObject.DepartureVO
 import com.example.porte.ValueObject.ParkingLotResponse
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -7,11 +9,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 enum class ApiService(val url: String) {
-    PARKING("http://openapi.airport.kr/openapi/service/StatusOfParking/")
+    PARKING("http://openapi.airport.kr/openapi/service/StatusOfParking/"),
+    DEPARTURE("http://openapi.airport.kr/openapi/service/StatusOfDepartures/")
 }
 
 
@@ -31,13 +33,18 @@ object ApiUtil {
         return retrofitBuilder
     }
 
-    fun getParkingLotService(service: ApiService): ParkingLotInfoNetwork {
+    fun getParkingLotService(service: ApiService): ParkingLotNetwork {
         val retrofit = buildRetrofit(service)
-        return retrofit.create(ParkingLotInfoNetwork::class.java)
+        return retrofit.create(ParkingLotNetwork::class.java)
+    }
+
+    fun getDepartureService(service: ApiService): DepartureNetwork {
+        val retrofit = buildRetrofit(service)
+        return retrofit.create(DepartureNetwork::class.java)
     }
 }
 
-interface ParkingLotInfoNetwork {
+interface ParkingLotNetwork {
     @GET("getTrackingParking")
 
     fun getTop(
@@ -46,4 +53,13 @@ interface ParkingLotInfoNetwork {
         @Query("numOfRows") numOfRows: String
 
     ): Call<ParkingLotResponse>
+}
+
+interface DepartureNetwork {
+    @GET("getDeparturesCongestion")
+
+    fun getTop(
+        @Query("serviceKey", encoded = true) serviceKey: String,
+        @Query("terno") terno: String
+    ): Call<DepartureResponse>
 }

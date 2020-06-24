@@ -1,7 +1,5 @@
 package com.example.porte.ValueObject
 
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable
-import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
@@ -10,15 +8,15 @@ import org.simpleframework.xml.Root
 data class ParkingLotResponse (
     @field: Element (name = "header", required = false)
     @param: Element (name = "header", required = false)
-    var header: Header,
+    var header: ParkingLotHeader,
 
     @field: Element (name = "body", required = false)
     @param: Element (name = "body", required = false)
-    var body: Body
+    var body: ParkingLotBody
 )
 
 @Root(name = "header", strict = false)
-data class Header (
+data class ParkingLotHeader (
     @field: Element (name = "resultCode", required = false)
     @param: Element (name = "resultCode", required = false)
     var resultCode: String,
@@ -29,10 +27,10 @@ data class Header (
 )
 
 @Root(name = "body", strict = false)
-data class Body (
+data class ParkingLotBody (
     @field: Element (name = "items", required = false)
     @param: Element (name = "items", required = false)
-    var items: Items,
+    var parkingItems: ParkingItems,
 
     @field: Element (name = "numOfRows", required = false)
     @param: Element (name = "numOfRows", required = false)
@@ -48,14 +46,14 @@ data class Body (
 )
 
 @Root(name = "items", strict = false)
-data class Items (
+data class ParkingItems (
     @field: ElementList (entry = "item", name = "item", inline = true, required = false)
     @param: ElementList (entry = "item", name = "item", inline = true, required = false)
-    val itemList: List<ParkingLotDetailResponse>
+    val itemList: List<ParkingLotVO>
 )
 
 @Root(name = "item", strict = false)
-data class ParkingLotDetailResponse (
+data class ParkingLotVO (
     @field:Element (name = "datetm")
     @param:Element (name = "datetm")
     var datetm: String,
