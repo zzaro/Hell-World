@@ -13,6 +13,7 @@ import com.example.porte.Util.ApiService
 import com.example.porte.Util.ApiUtil
 import com.example.porte.ValueObject.DepartureResponse
 import com.example.porte.ValueObject.DepartureVO
+import com.example.porte.ValueObject.ParkingLotVO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,26 +58,34 @@ class ParkingLotInfoFragment : Fragment() {
             }
         }
 
-        ApiUtil.getParkingLotService(ApiService.PARKING).getTop(SERVICE_KEY, PAGE_NO, NUM_OF_ROWS)?.enqueue(object : Callback<ParkingLotResponse> {
-            override fun onFailure(call: Call<ParkingLotResponse>, t: Throwable) {
-                Log.d("API", "Fail(Parking)")
-                Log.d("API", call.request().toString())
-                Log.d("API", "${t}")
+//        ApiUtil.getParkingLotService(ApiService.PARKING).getTop(SERVICE_KEY, PAGE_NO, NUM_OF_ROWS)?.enqueue(object : Callback<ParkingLotResponse> {
+//            override fun onFailure(call: Call<ParkingLotResponse>, t: Throwable) {
+//                Log.d("API", "Fail(Parking)")
+//                Log.d("API", call.request().toString())
+//                Log.d("API", "${t}")
+//
+//            }
+//
+//            override fun onResponse(
+//                call: Call<ParkingLotResponse>,
+//                response: Response<ParkingLotResponse>
+//            ) {
+//                Log.d("API", "Success(Parking)")
+//                Log.d("API", call.request().toString())
+//                Log.d("API", response.body().toString())
+//
+//                val resultList = response.body()!!.body.parkingItems.itemList
+//
+//                for (item in resultList) {
+//                    Log.d("result", item.floor)
+//                    Log.d("result", item.parkingarea)
+//                    Log.d("result", item.parking)
+//                }
+//            }
+//        })
 
-            }
 
-            override fun onResponse(
-                call: Call<ParkingLotResponse>,
-                response: Response<ParkingLotResponse>
-            ) {
-                Log.d("API", "Success(Parking)")
-                Log.d("API", call.request().toString())
-                Log.d("API", response.body().toString())
-            }
-        })
-
-
-        ApiUtil.getDepartureService(ApiService.DEPARTURE).getTop(SERVICE_KEY, TERNO)?.enqueue(object: Callback<DepartureResponse> {
+        ApiUtil.getDepartureService(ApiService.DEPARTURE).getTop(SERVICE_KEY, "2")?.enqueue(object: Callback<DepartureResponse> {
             override fun onFailure(call: Call<DepartureResponse>, t: Throwable) {
                 Log.d("API", "Fail(Departure)")
                 Log.d("API", call.request().toString())
@@ -90,6 +99,8 @@ class ParkingLotInfoFragment : Fragment() {
                 Log.d("API", "Success(Departure)")
                 Log.d("API", call.request().toString())
                 Log.d("API", response.body().toString())
+
+                val resultList = response.body()!!.body.departureitems.item
             }
         })
 
@@ -103,6 +114,5 @@ class ParkingLotInfoFragment : Fragment() {
         const val SERVICE_KEY = "pgJQkZVlRkVRdW6c0pWRBmu2bTdIQ1FMprnOLoRYLKX%2BHQRPkG%2BlaEJ28smMY0qp3EkcvxqmvjoqADaTBNMD%2FA%3D%3D"
         const val PAGE_NO = "1"
         const val NUM_OF_ROWS = "13"
-        const val TERNO = "1"
     }
 }
