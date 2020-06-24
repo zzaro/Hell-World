@@ -15,24 +15,6 @@ data class ParkingLotResponse (
     @field: Element (name = "body", required = false)
     @param: Element (name = "body", required = false)
     var body: Body
-//
-//    @field: Element (name = "items", required = false)
-//    @param: Element (name = "items", required = false)
-//    var items: Items,
-//
-//    @field: Element (name = "numOfRows", required = false)
-//    @param: Element (name = "numOfRows", required = false)
-//    var numOfRows: String,
-//
-//    @field: Element (name = "pageNo", required = false)
-//    @param: Element (name = "pageNo", required = false)
-//    var pageNo: String,
-//
-//    @field: Element (name = "totalCount", required = false)
-//    @param: Element (name = "totalCount", required = false)
-//    var totalCount: String
-
-
 )
 
 @Root(name = "header", strict = false)

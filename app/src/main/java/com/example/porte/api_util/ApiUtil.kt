@@ -10,35 +10,40 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+enum class ApiService(val url: String) {
+    PARKING("http://openapi.airport.kr/openapi/service/StatusOfParking/")
+}
 
-object ParkingLotAPI {
+
+object ApiUtil {
 
     var gson = GsonBuilder()
         .setLenient()
         .create()
 
-    val retrofit = Retrofit.Builder()
-        .baseUrl("http://openapi.airport.kr/openapi/service/StatusOfParking/")
-        .addConverterFactory(SimpleXmlConverterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    fun buildRetrofit(service: ApiService): Retrofit {
+        val retrofitBuilder = Retrofit.Builder()
+            .baseUrl(service.url)
+            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-    fun getService(): ParkingLotInfoNetwork {
+        return retrofitBuilder
+    }
+
+    fun getParkingLotService(service: ApiService): ParkingLotInfoNetwork {
+        val retrofit = buildRetrofit(service)
         return retrofit.create(ParkingLotInfoNetwork::class.java)
     }
 }
 
 interface ParkingLotInfoNetwork {
     @GET("getTrackingParking")
-//    @GET("getTrackingParking?serviceKey=${serviceKey}")
 
     fun getTop(
-        @Query("serviceKey") serviceKey: String,
+        @Query("serviceKey", encoded = true) serviceKey: String,
         @Query("pageNo") pageNo: String,
         @Query("numOfRows") numOfRows: String
 
-//        @Path("serviceKey") serviceKey: String,
-//        @Path("pageNo") pageNo: String,
-//        @Path("numOfRows") numOfRows: String
     ): Call<ParkingLotResponse>
 }
