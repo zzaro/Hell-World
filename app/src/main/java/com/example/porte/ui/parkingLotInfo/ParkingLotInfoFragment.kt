@@ -7,17 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.creageek.segmentedbutton.SegmentedButton
 import com.example.porte.R
-import com.example.porte.ValueObject.ParkingLotResponse
-import com.example.porte.Util.ApiService
-import com.example.porte.Util.ApiUtil
-import com.example.porte.ValueObject.DepartureResponse
-import com.example.porte.ValueObject.DepartureVO
-import com.example.porte.ValueObject.ParkingLotVO
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 //import javax.security.auth.callback.Callback
 
 /**
@@ -34,7 +28,11 @@ class ParkingLotInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        parkingLotViewModel.requestAPI()
+
         val root = inflater.inflate(R.layout.fragment_parking_lot_info, container, false)
+
+        val recyclerView: RecyclerView = root.findViewById(R.id.parkingLot_rv)
 
         // Segment Control 초기화
         val segmented: SegmentedButton = root.findViewById(R.id.terminal_segment_control)
@@ -51,6 +49,20 @@ class ParkingLotInfoFragment : Fragment() {
            // notifies when segment was checked
             onSegmentChecked { segment ->
                 Log.d("creageek:segmented", "Segment ${segment.text} checked")
+                when (segment.text) {
+                    "제1터미널" -> {
+                        recyclerView.adapter = ParkingLotCardAdapter(parkingLotViewModel.allParking.first())
+                        recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
+                        //                        Log.d("rv_result", parkingLotViewModel.allParking.first().size.toString())
+                    }
+
+                    "제2터미널" -> {
+                        recyclerView.adapter = ParkingLotCardAdapter(parkingLotViewModel.allParking.last())
+                        recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
+                        //                        Log.d("rv_result", parkingLotViewModel.allParking.last().size.toString())
+                    }
+
+                }
             }
             // notifies when segment was unchecked
             onSegmentUnchecked { segment ->
@@ -63,7 +75,8 @@ class ParkingLotInfoFragment : Fragment() {
         }
 
 
-        parkingLotViewModel.requestAPI()
+
+
 
 
 
