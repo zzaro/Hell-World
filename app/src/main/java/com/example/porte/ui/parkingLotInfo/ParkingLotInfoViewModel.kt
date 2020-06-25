@@ -18,15 +18,16 @@ typealias DetailParkingType = MutableList<ParkingLotVO>
 class ParkingLotInfoViewModel : ViewModel(){
 
 
-    lateinit var allParking: AllParkingType
+    var allParking: AllParkingType? = null
 
-    fun requestAPI() {
+    fun requestAPI(complete: () -> Unit, fail: () -> Unit) {
         ApiUtil.getParkingLotService(ApiService.PARKING).getTop(SERVICE_KEY, PAGE_NO, NUM_OF_ROWS)?.enqueue(object :
             Callback<ParkingLotResponse> {
             override fun onFailure(call: Call<ParkingLotResponse>, t: Throwable) {
                 Log.d("API", "Fail(Parking)")
                 Log.d("API", call.request().toString())
                 Log.d("API", "${t}")
+                fail()
 
             }
 
@@ -72,8 +73,7 @@ class ParkingLotInfoViewModel : ViewModel(){
                 } // End of for statement
 
                 allParking = listOf(listOf(t1ShortTerm, t1LongTerm), listOf(t2ShortTerm, t2LongTerm))
-                Log.d("result", allParking.toString())
-                Log.d("result", allParking.first().first().size.toString())
+                complete()
             }
         })
     }

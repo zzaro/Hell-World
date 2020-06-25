@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creageek.segmentedbutton.SegmentedButton
 import com.example.porte.R
+
 
 //import javax.security.auth.callback.Callback
 
@@ -28,11 +30,22 @@ class ParkingLotInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        parkingLotViewModel.requestAPI()
+
 
         val root = inflater.inflate(R.layout.fragment_parking_lot_info, container, false)
 
         val recyclerView: RecyclerView = root.findViewById(R.id.parkingLot_rv)
+
+        parkingLotViewModel.requestAPI(
+            complete = {
+                recyclerView.adapter = parkingLotViewModel.allParking?.first()?.let {ParkingLotCardAdapter(it) }
+                recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
+            },
+            fail = {
+                Toast.makeText(context, "데이터를 불러오는데 문제가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            })
+
+
 
         // Segment Control 초기화
         val segmented: SegmentedButton = root.findViewById(R.id.terminal_segment_control)
@@ -51,13 +64,17 @@ class ParkingLotInfoFragment : Fragment() {
                 Log.d("creageek:segmented", "Segment ${segment.text} checked")
                 when (segment.text) {
                     "제1터미널" -> {
-                        recyclerView.adapter = ParkingLotCardAdapter(parkingLotViewModel.allParking.first())
+                        recyclerView.adapter = parkingLotViewModel.allParking?.first()?.let {
+                            ParkingLotCardAdapter(it)
+                        }
                         recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
                         //                        Log.d("rv_result", parkingLotViewModel.allParking.first().size.toString())
                     }
 
                     "제2터미널" -> {
-                        recyclerView.adapter = ParkingLotCardAdapter(parkingLotViewModel.allParking.last())
+                        recyclerView.adapter = parkingLotViewModel.allParking?.last()?.let {
+                            ParkingLotCardAdapter(it)
+                        }
                         recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
                         //                        Log.d("rv_result", parkingLotViewModel.allParking.last().size.toString())
                     }
@@ -73,14 +90,6 @@ class ParkingLotInfoFragment : Fragment() {
                 Log.d("creageek:segmented", "Segment ${segment.text} rechecked")
             }
         }
-
-
-
-
-
-
-
-
 
 //        ApiUtil.getDepartureService(ApiService.DEPARTURE).getTop(SERVICE_KEY, "2")?.enqueue(object: Callback<DepartureResponse> {
 //            override fun onFailure(call: Call<DepartureResponse>, t: Throwable) {
@@ -104,7 +113,12 @@ class ParkingLotInfoFragment : Fragment() {
         // Inflate the layout for this fragment
         return root
 
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val recyclerView: RecyclerView = view.findViewById(R.id.parkingLot_rv)
 
     }
 
