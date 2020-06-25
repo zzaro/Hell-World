@@ -28,7 +28,6 @@ class ParkingLotInfoViewModel : ViewModel(){
                 Log.d("API", call.request().toString())
                 Log.d("API", "${t}")
                 fail()
-
             }
 
             override fun onResponse(

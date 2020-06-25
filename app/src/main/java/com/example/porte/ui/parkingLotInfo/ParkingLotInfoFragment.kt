@@ -68,7 +68,7 @@ class ParkingLotInfoFragment : Fragment() {
                             ParkingLotCardAdapter(it)
                         }
                         recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
-                        //                        Log.d("rv_result", parkingLotViewModel.allParking.first().size.toString())
+                        //Log.d("rv_result", parkingLotViewModel.allParking.first().size.toString())
                     }
 
                     "제2터미널" -> {
@@ -76,7 +76,7 @@ class ParkingLotInfoFragment : Fragment() {
                             ParkingLotCardAdapter(it)
                         }
                         recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
-                        //                        Log.d("rv_result", parkingLotViewModel.allParking.last().size.toString())
+                        //Log.d("rv_result", parkingLotViewModel.allParking.last().size.toString())
                     }
 
                 }
@@ -90,25 +90,6 @@ class ParkingLotInfoFragment : Fragment() {
                 Log.d("creageek:segmented", "Segment ${segment.text} rechecked")
             }
         }
-
-//        ApiUtil.getDepartureService(ApiService.DEPARTURE).getTop(SERVICE_KEY, "2")?.enqueue(object: Callback<DepartureResponse> {
-//            override fun onFailure(call: Call<DepartureResponse>, t: Throwable) {
-//                Log.d("API", "Fail(Departure)")
-//                Log.d("API", call.request().toString())
-//                Log.d("API", "${t}")
-//            }
-//
-//            override fun onResponse(
-//                call: Call<DepartureResponse>,
-//                response: Response<DepartureResponse>
-//            ) {
-//                Log.d("API", "Success(Departure)")
-//                Log.d("API", call.request().toString())
-//                Log.d("API", response.body().toString())
-//
-//                val resultList = response.body()!!.body.departureitems.item
-//            }
-//        })
 
         // Inflate the layout for this fragment
         return root
