@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.creageek.segmentedbutton.SegmentedButton
 import com.example.porte.R
 import com.example.porte.ValueObject.ParkingLotResponse
@@ -24,6 +25,9 @@ import retrofit2.Response
  */
 class ParkingLotInfoFragment : Fragment() {
 
+    val parkingLotViewModel by lazy {
+        ViewModelProvider(this).get(ParkingLotInfoViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,51 +62,31 @@ class ParkingLotInfoFragment : Fragment() {
             }
         }
 
-//        ApiUtil.getParkingLotService(ApiService.PARKING).getTop(SERVICE_KEY, PAGE_NO, NUM_OF_ROWS)?.enqueue(object : Callback<ParkingLotResponse> {
-//            override fun onFailure(call: Call<ParkingLotResponse>, t: Throwable) {
-//                Log.d("API", "Fail(Parking)")
+
+        parkingLotViewModel.requestAPI()
+
+
+
+
+
+//        ApiUtil.getDepartureService(ApiService.DEPARTURE).getTop(SERVICE_KEY, "2")?.enqueue(object: Callback<DepartureResponse> {
+//            override fun onFailure(call: Call<DepartureResponse>, t: Throwable) {
+//                Log.d("API", "Fail(Departure)")
 //                Log.d("API", call.request().toString())
 //                Log.d("API", "${t}")
-//
 //            }
 //
 //            override fun onResponse(
-//                call: Call<ParkingLotResponse>,
-//                response: Response<ParkingLotResponse>
+//                call: Call<DepartureResponse>,
+//                response: Response<DepartureResponse>
 //            ) {
-//                Log.d("API", "Success(Parking)")
+//                Log.d("API", "Success(Departure)")
 //                Log.d("API", call.request().toString())
 //                Log.d("API", response.body().toString())
 //
-//                val resultList = response.body()!!.body.parkingItems.itemList
-//
-//                for (item in resultList) {
-//                    Log.d("result", item.floor)
-//                    Log.d("result", item.parkingarea)
-//                    Log.d("result", item.parking)
-//                }
+//                val resultList = response.body()!!.body.departureitems.item
 //            }
 //        })
-
-
-        ApiUtil.getDepartureService(ApiService.DEPARTURE).getTop(SERVICE_KEY, "2")?.enqueue(object: Callback<DepartureResponse> {
-            override fun onFailure(call: Call<DepartureResponse>, t: Throwable) {
-                Log.d("API", "Fail(Departure)")
-                Log.d("API", call.request().toString())
-                Log.d("API", "${t}")
-            }
-
-            override fun onResponse(
-                call: Call<DepartureResponse>,
-                response: Response<DepartureResponse>
-            ) {
-                Log.d("API", "Success(Departure)")
-                Log.d("API", call.request().toString())
-                Log.d("API", response.body().toString())
-
-                val resultList = response.body()!!.body.departureitems.item
-            }
-        })
 
         // Inflate the layout for this fragment
         return root
@@ -110,9 +94,5 @@ class ParkingLotInfoFragment : Fragment() {
 
 
     }
-    companion object {
-        const val SERVICE_KEY = "pgJQkZVlRkVRdW6c0pWRBmu2bTdIQ1FMprnOLoRYLKX%2BHQRPkG%2BlaEJ28smMY0qp3EkcvxqmvjoqADaTBNMD%2FA%3D%3D"
-        const val PAGE_NO = "1"
-        const val NUM_OF_ROWS = "13"
-    }
+
 }
