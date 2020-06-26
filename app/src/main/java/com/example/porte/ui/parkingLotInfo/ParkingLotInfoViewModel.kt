@@ -1,7 +1,11 @@
 package com.example.porte.ui.parkingLotInfo
 
 import android.util.Log
+import android.widget.ImageView
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.porte.R
 import com.example.porte.Util.ApiService
 import com.example.porte.Util.ApiUtil
 import com.example.porte.ValueObject.ParkingLotResponse
@@ -85,7 +89,7 @@ class ParkingLotInfoViewModel : ViewModel(){
 
 }
 
-
+// 다음과 같은 구조로 이루어짐.
 //[
 //    [
 //        [
@@ -104,4 +108,14 @@ class ParkingLotInfoViewModel : ViewModel(){
 //    ],
 //    [
 //        [
-//            ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지상1층, parking=269, parkingarea=988), ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지상2층, parking=162, parkingarea=514), ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지하M층, parking=209, parkingarea=751)], [ParkingLotVO(datetm=20200625161516.892, floor=T2 장기 주차장, parking=70, parkingarea=3898)]]]
+//            ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지상1층, parking=269, parkingarea=988),
+//            ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지상2층, parking=162, parkingarea=514),
+//            ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지하M층, parking=209, parkingarea=751)
+//        ],
+//        [
+//            ParkingLotVO(datetm=20200625161516.892, floor=T2 장기 주차장, parking=70, parkingarea=3898)
+//        ]
+//    ]
+//]
+
+
