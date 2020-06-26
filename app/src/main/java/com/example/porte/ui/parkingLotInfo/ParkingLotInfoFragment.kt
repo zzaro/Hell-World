@@ -1,11 +1,15 @@
 package com.example.porte.ui.parkingLotInfo
 
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,16 +34,40 @@ class ParkingLotInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         val root = inflater.inflate(R.layout.fragment_parking_lot_info, container, false)
-
         val recyclerView: RecyclerView = root.findViewById(R.id.parkingLot_rv)
+        val imageView: ImageView = root.findViewById(R.id.parkingLotImgView)
+
+
+        // 스크롤 위치에 따라 지도 변경
+        val scrollListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    val layoutManager: LinearLayoutManager =
+                        recyclerView.layoutManager as LinearLayoutManager
+                    val position = layoutManager.findFirstVisibleItemPosition()
+                    changeImg(position)
+                }
+            }
+
+            fun changeImg(row: Int) {
+                val imageView: ImageView = root.findViewById(R.id.parkingLotImgView)
+                if (row == 0) {
+                    imageView.setImageResource(R.drawable.t1_short)
+                }
+                else {
+                    imageView.setImageResource(R.drawable.t1_long)
+                }
+            }
+        }
 
         parkingLotViewModel.requestAPI(
             complete = {
                 recyclerView.adapter = parkingLotViewModel.allParking?.first()?.let {ParkingLotCardAdapter(it) }
                 recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
+                recyclerView.addOnScrollListener(scrollListener)
             },
             fail = {
                 Toast.makeText(context, "데이터를 불러오는데 문제가 발생했습니다.", Toast.LENGTH_SHORT).show()
@@ -64,19 +92,15 @@ class ParkingLotInfoFragment : Fragment() {
                 Log.d("creageek:segmented", "Segment ${segment.text} checked")
                 when (segment.text) {
                     "제1터미널" -> {
-                        recyclerView.adapter = parkingLotViewModel.allParking?.first()?.let {
-                            ParkingLotCardAdapter(it)
-                        }
-                        recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
-                        //Log.d("rv_result", parkingLotViewModel.allParking.first().size.toString())
+                        imageView.setImageResource(R.drawable.t1_short)
+                        recyclerView.adapter = parkingLotViewModel.allParking?.first()?.let { ParkingLotCardAdapter(it) }
+                        recyclerView.addOnScrollListener(scrollListener)
                     }
 
                     "제2터미널" -> {
-                        recyclerView.adapter = parkingLotViewModel.allParking?.last()?.let {
-                            ParkingLotCardAdapter(it)
-                        }
-                        recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
-                        //Log.d("rv_result", parkingLotViewModel.allParking.last().size.toString())
+                        imageView.setImageResource(R.drawable.t2_long_short)
+                        recyclerView.adapter = parkingLotViewModel.allParking?.last()?.let { ParkingLotCardAdapter(it) }
+                        recyclerView.removeOnScrollListener(scrollListener)
                     }
 
                 }
@@ -95,12 +119,4 @@ class ParkingLotInfoFragment : Fragment() {
         return root
 
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val recyclerView: RecyclerView = view.findViewById(R.id.parkingLot_rv)
-
-    }
-
 }
