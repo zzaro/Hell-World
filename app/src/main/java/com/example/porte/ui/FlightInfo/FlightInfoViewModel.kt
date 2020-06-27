@@ -32,7 +32,10 @@ class FlightInfoViewModel: ViewModel() {
             ) {
                 Log.d("API", "Success(Flight)")
                 Log.d("API", call.request().toString())
-                Log.d("API", response.body().toString())
+
+
+                val resultList = response.body()!!.body.items.itemList
+                Log.d("API", resultList.toString())
 
                 complete?.let {it()}
             }
