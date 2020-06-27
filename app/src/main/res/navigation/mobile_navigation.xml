@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_parking_lot_info" />
     <fragment
         android:id="@+id/navigation_flightInfo"
-        android:name="com.example.porte.FlightInfo"
+        android:name="com.example.porte.ui.FlightInfo.FlightInfoFragment"
         android:label="fragment_flight_info"
         tools:layout="@layout/fragment_flight_info" />
 </navigation>

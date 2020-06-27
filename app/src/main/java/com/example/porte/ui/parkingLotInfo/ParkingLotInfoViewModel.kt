@@ -1,11 +1,7 @@
 package com.example.porte.ui.parkingLotInfo
 
 import android.util.Log
-import android.widget.ImageView
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.porte.R
 import com.example.porte.Util.ApiService
 import com.example.porte.Util.ApiUtil
 import com.example.porte.ValueObject.ParkingLotResponse

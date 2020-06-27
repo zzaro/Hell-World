@@ -63,6 +63,7 @@ class ParkingLotInfoFragment : Fragment() {
             }
         }
 
+        // 주차장 현황 API 호출
         parkingLotViewModel.requestAPI(
             complete = {
                 recyclerView.adapter = parkingLotViewModel.allParking?.first()?.let {ParkingLotCardAdapter(it) }

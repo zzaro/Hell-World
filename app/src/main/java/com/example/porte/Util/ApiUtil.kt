@@ -1,7 +1,7 @@
 package com.example.porte.Util
 
 import com.example.porte.ValueObject.DepartureResponse
-import com.example.porte.ValueObject.DepartureVO
+import com.example.porte.ValueObject.FlightResponse
 import com.example.porte.ValueObject.ParkingLotResponse
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -46,10 +46,10 @@ object ApiUtil {
         return retrofit.create(DepartureNetwork::class.java)
     }
     // 항공 현황 레트로핏 빌더
-//    fun getFlightService(service: ApiService): FlightNetwork {
-//        val retrofit = buildRetrofit(service)
-//        return retrofit.create(FlightNetwork::class.java)
-//    }
+    fun getFlightService(service: ApiService): FlightNetwork {
+        val retrofit = buildRetrofit(service)
+        return retrofit.create(FlightNetwork::class.java)
+    }
 }
 
 // 주차장 정보
@@ -75,12 +75,12 @@ interface DepartureNetwork {
 }
 
 // 항공편 정보
-//interface FlightNetwork {
-//    @GET("getPassengerDeparturesDS")
-//
-//    fun getTop(
-//        @Query("serviceKey", encoded = true) serviceKey: String,
-//        @Query("airport_code") airiport_code: String
-//    ): Call<FlightResponse>
-//}
+interface FlightNetwork {
+    @GET("getPassengerDeparturesDS")
+
+    fun getTop(
+        @Query("serviceKey", encoded = true) serviceKey: String,
+        @Query("airport_code") airiport_code: String
+    ): Call<FlightResponse>
+}
 
