@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.porte.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="항공편검색"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
@@ -27,4 +27,9 @@
         android:name="com.example.porte.ui.parkingLotInfo.ParkingLotInfoFragment"
         android:label="주차장 정보"
         tools:layout="@layout/fragment_parking_lot_info" />
+    <fragment
+        android:id="@+id/navigation_flightInfo"
+        android:name="com.example.porte.FlightInfo"
+        android:label="fragment_flight_info"
+        tools:layout="@layout/fragment_flight_info" />
 </navigation>
