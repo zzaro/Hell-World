@@ -1,6 +1,7 @@
 package com.example.porte.ui.FlightInfo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.porte.R
+import com.example.porte.Util.DBHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 /**
@@ -39,6 +42,50 @@ class FlightInfoFragment : Fragment(){
 
             val view = layoutInflater.inflate(R.layout.fragment_flight_info_bottom_sheet, null)
             val dialog = BottomSheetDialog(this.context!!)
+
+            val searchView: SearchView = view.findViewById(R.id.flight_info_airport_search_view)
+            val recyclerView: RecyclerView = view.findViewById(R.id.flight_info_airport_recycler_view)
+            searchView.requestFocus()
+
+            var dbHelper = DBHelper(this.context!!)
+            var db = dbHelper.readableDatabase
+
+
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    searchView.clearFocus()
+                    Log.d("#DB", "TextSubmit")
+                    var cursor = db.rawQuery("SELECT * FROM airport\n" +
+                            "WHERE name='${query}' or\n" +
+                            "country = '${query}' or\n" +
+                            "city = '${query}' or\n" +
+                            "code = '${query}';"
+                        , null)
+
+                    if (cursor.moveToFirst()){
+                        do{
+                            var code = cursor.getString(cursor.getColumnIndex("code"));
+                            var country = cursor.getString(cursor.getColumnIndex("country"));
+                            var city = cursor.getString(cursor.getColumnIndex("city"));
+                            var name = cursor.getString(cursor.getColumnIndex("name"));
+                            // do what ever you want here
+                            Log.d("#DB", code.toString())
+                            Log.d("#DB", country.toString())
+                            Log.d("#DB", city.toString())
+                            Log.d("#DB", name.toString())
+                            Log.d("#DB", "-------------------")
+                        }while(cursor.moveToNext());
+                    }
+                    cursor.close();
+
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
+            })
+
             dialog.setContentView(view)
             dialog.show()
         })
