@@ -1,7 +1,6 @@
 package com.example.porte.ui.FlightInfo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -19,7 +18,6 @@ import com.example.porte.Util.QueryTextModifier
 import com.example.porte.ValueObject.AirportCodeVO
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_flight_info.view.*
-import kotlinx.coroutines.selects.select
 
 /**
  * A simple [Fragment] subclass.
@@ -47,27 +45,27 @@ class FlightInfoFragment : Fragment(){
             imageView.isVisible = false
 
 
-            val view = layoutInflater.inflate(R.layout.fragment_flight_info_bottom_sheet, null)
+            val bottomView = layoutInflater.inflate(R.layout.fragment_flight_info_bottom_sheet, null)
             val dialog = BottomSheetDialog(this.context!!)
 
-            val alertImageView: ImageView = view.findViewById(R.id.flight_info_airport_alert_image_view)
-            val searchView: SearchView = view.findViewById(R.id.flight_info_airport_search_view)
-            val recyclerView: RecyclerView = view.findViewById(R.id.flight_info_airport_recycler_view)
+            val alertImageView: ImageView = bottomView.findViewById(R.id.flight_info_airport_alert_image_view)
+            val bottomSearchView: SearchView = bottomView.findViewById(R.id.flight_info_airport_search_view)
+            val bottomRecyclerView: RecyclerView = bottomView.findViewById(R.id.flight_info_airport_recycler_view)
 
             alertImageView.isVisible = false
-            searchView.requestFocus()
+            bottomSearchView.requestFocus()
 
             var dbHelper = DBHelper(this.context!!)
             var db = dbHelper.readableDatabase
 
             // 검색창 리스너 추가
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            bottomSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 var airportCodeList = mutableListOf<AirportCodeVO>()
                 // 검색 클릭 시
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     // 검색 클릭 시 검색 실패 메시지 삭 및 키보드 내리기
                     alertImageView.isVisible = false
-                    searchView.clearFocus()
+                    bottomSearchView.clearFocus()
 
                     // 검색어 대문자로 변환 (공항코드가 대문자 영문)
                     val queryText = QueryTextModifier.modifyText(query!!)
@@ -104,13 +102,13 @@ class FlightInfoFragment : Fragment(){
                     }
 
                     // 리사이클러뷰 초기 설정.
-                    recyclerView.adapter = AirportCodeAdapter(airportCodeList)
-                    recyclerView.layoutManager = LinearLayoutManager(activity)
-                    recyclerView.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+                    bottomRecyclerView.adapter = AirportCodeAdapter(airportCodeList)
+                    bottomRecyclerView.layoutManager = LinearLayoutManager(activity)
+                    bottomRecyclerView.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
                         override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
                         }
 
-                        // 터치 입력
+                        // 공항 선택 시
                         override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                             val child = rv.findChildViewUnder(e.x, e.y)
                             val position = rv.getChildAdapterPosition(child!!)
@@ -120,7 +118,11 @@ class FlightInfoFragment : Fragment(){
                             val code = selectedItem.code
                             cardView.flight_info_select_airport_btn.text = name + "\n" + code
 
+                            // Bottom Sheet 내리기
                             dialog.dismiss()
+
+                            // SearchView 보이기
+                            searchView.isVisible = true
 
                             return false
                         }
@@ -137,7 +139,7 @@ class FlightInfoFragment : Fragment(){
                     return false
                 }
             })
-            dialog.setContentView(view)
+            dialog.setContentView(bottomView)
             dialog.show()
 
             dialog.setOnDismissListener {
