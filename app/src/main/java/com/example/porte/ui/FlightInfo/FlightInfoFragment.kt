@@ -40,10 +40,12 @@ class FlightInfoFragment : Fragment(){
         val cardView: CardView = root.findViewById(R.id.flight_info_card_view)
         val searchView: SearchView = root.findViewById(R.id.flight_info_flight_search_view)
         val textView: TextView = root.findViewById(R.id.flight_info_text_view)
-
+        val imageView: ImageView = root.findViewById(R.id.flight_info_image_view)
         // 공항 코드 검색 Bottom Sheet Dialog 생성.
         cardView.setOnClickListener(View.OnClickListener {
             textView.isVisible = false
+            imageView.isVisible = false
+
 
             val view = layoutInflater.inflate(R.layout.fragment_flight_info_bottom_sheet, null)
             val dialog = BottomSheetDialog(this.context!!)
@@ -142,9 +144,11 @@ class FlightInfoFragment : Fragment(){
                 // 아무 공항도 선택되지 않았다면
                 if (cardView.flight_info_select_airport_btn.text == "공항 선택") {
                     textView.isVisible = true
+                    imageView.isVisible = true
                 }
                 else {
                     textView.isVisible = false
+                    imageView.isVisible = false
                 }
             }
         })// End of cardView.setOnClickListener

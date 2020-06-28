@@ -7,21 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.FlightInfo.FlightInfoFragment">
 
-    <TextView
-        android:id="@+id/flight_info_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        android:text="도착 공항을 설정해주세요."
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:gravity="center"/>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/flight_info_card_view"
         android:layout_width="match_parent"
@@ -119,6 +104,32 @@
 
         app:layout_constraintTop_toBottomOf="@id/flight_info_flight_search_view"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/flight_info_image_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@id/flight_info_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/flight_info_flight_search_view"
+        app:srcCompat="@drawable/ic_arrow_upward_black_24dp"></ImageView>
+
+    <TextView
+        android:id="@+id/flight_info_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:text="도착 공항을 설정해주세요."
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:gravity="center"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
