@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFFFF"
     android:id="@+id/flight_info_main_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.FlightInfo.FlightInfoFragment">

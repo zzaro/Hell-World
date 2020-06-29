@@ -1,6 +1,7 @@
 package com.example.porte.ui.FlightInfo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.porte.R
 import com.example.porte.Util.DBHelper
+import com.example.porte.Util.FragmentStateHelper
 import com.example.porte.Util.QueryTextModifier
 import com.example.porte.ValueObject.AirportCodeVO
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -39,7 +41,8 @@ class FlightInfoFragment : Fragment(){
         val searchView: SearchView = root.findViewById(R.id.flight_info_flight_search_view)
         val textView: TextView = root.findViewById(R.id.flight_info_text_view)
         val imageView: ImageView = root.findViewById(R.id.flight_info_image_view)
-        // 공항 코드 검색 Bottom Sheet Dialog 생성.
+
+        // Bottom Sheet Dialog(공항 코드 검색) 생성.
         cardView.setOnClickListener(View.OnClickListener {
             textView.isVisible = false
             imageView.isVisible = false
@@ -158,5 +161,11 @@ class FlightInfoFragment : Fragment(){
     }
 
 
+    private fun setBottomDialotSheet() {
 
+    }
+
+    companion object {
+        val KEY = "FlightInfoFragment"
+    }
 }
