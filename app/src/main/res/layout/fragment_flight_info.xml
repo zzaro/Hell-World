@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
-
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true">
@@ -92,10 +91,10 @@
 
         android:layout_marginTop="0dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="48dp"
+        android:layout_marginRight="24dp"
 
         android:iconifiedByDefault="false"
-        android:queryHint="항공편 이름을 입력하세요."
+        android:queryHint="항공사 또는 항공편을 입력하세요"
         android:visibility="invisible"/>
 
     <androidx.recyclerview.widget.RecyclerView

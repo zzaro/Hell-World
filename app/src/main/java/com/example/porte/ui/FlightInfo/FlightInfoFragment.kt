@@ -1,7 +1,6 @@
 package com.example.porte.ui.FlightInfo
 
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,11 +11,11 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.porte.R
 import com.example.porte.Util.DBHelper
-import com.example.porte.Util.FragmentStateHelper
 import com.example.porte.Util.QueryTextModifier
 import com.example.porte.ValueObject.AirportCodeVO
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -32,6 +31,8 @@ class FlightInfoFragment : Fragment(){
         ViewModelProvider(this).get(FlightInfoViewModel::class.java)
     }
 
+    lateinit var adapter: FlightInfoAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +44,22 @@ class FlightInfoFragment : Fragment(){
         val recyclerView: RecyclerView = root.findViewById(R.id.flight_info_recycler_view)
         val textView: TextView = root.findViewById(R.id.flight_info_text_view)
         val imageView: ImageView = root.findViewById(R.id.flight_info_image_view)
+
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                adapter.filter.filter(newText)
+
+                return true
+            }
+
+        })
+
 
         // Bottom Sheet Dialog(공항 코드 검색) 생성.
         cardView.setOnClickListener(View.OnClickListener {
@@ -57,6 +74,8 @@ class FlightInfoFragment : Fragment(){
             val bottomSearchView: SearchView = bottomView.findViewById(R.id.flight_info_airport_search_view)
             val bottomRecyclerView: RecyclerView = bottomView.findViewById(R.id.flight_info_airport_recycler_view)
 
+            bottomRecyclerView.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
+
             alertImageView.isVisible = false
             bottomSearchView.requestFocus()
 
@@ -66,6 +85,9 @@ class FlightInfoFragment : Fragment(){
             // 검색창 리스너 추가
             bottomSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 var airportCodeList = mutableListOf<AirportCodeVO>()
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
                 // 검색 클릭 시
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     // 검색 클릭 시 검색 실패 메시지 삭 및 키보드 내리기
@@ -106,60 +128,80 @@ class FlightInfoFragment : Fragment(){
                         Toast.makeText(activity, "검색 결과가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                     }
 
+
                     // 리사이클러뷰 초기 설정.
                     bottomRecyclerView.adapter = AirportCodeAdapter(airportCodeList)
                     bottomRecyclerView.layoutManager = LinearLayoutManager(activity)
                     bottomRecyclerView.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
-                        override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
-                        }
+                        var lastAction: Int? = null
 
                         // 공항 선택 시
                         override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                            val child = rv.findChildViewUnder(e.x, e.y)
-                            val position = rv.getChildAdapterPosition(child!!)
-
-                            // 선택 공항 표시
-                            val selectedItem = airportCodeList[position]
-                            val name = selectedItem.name
-                            val code = selectedItem.code
-                            val selectedAirportText = name + "\n" + code
-                            cardView.flight_info_select_airport_btn.text = selectedAirportText
-
-                            // 운항 정보 불러오기
-                            flightIfnoViewModel.requestAPI(code,
-                                complete = {
-                                    recyclerView.adapter = FlightInfoAdapter(it, selectedAirportText)
-                                    recyclerView.layoutManager = LinearLayoutManager(activity)
-
-                                    // SearchView 보이기
-                                    searchView.isVisible = true
-                                },
-                                fail = {
-                                    Toast.makeText(context, "데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
-                                    // 검색 결과가 없을 떄 리사이클러 뷰 결과 표시하지 않
-                                    recyclerView.adapter = FlightInfoAdapter(null, selectedAirportText)
-                                    // SearchView 가리기
-                                    searchView.isVisible = false
-                                    textView.isVisible = true
-                                    imageView.isVisible = true
+                            lastAction.let {
+                                if (e.action == MotionEvent.ACTION_UP) {
+                                    if (it == MotionEvent.ACTION_DOWN) {
+                                        lastAction = e.action
+                                        // 공항 선택
+                                        airportSelected(rv, e)
+                                        return true
+                                    }
+                                    else {
+                                        lastAction = e.action
+                                        Log.d("result", "222")
+                                        return false
+                                    }
                                 }
-                            )
-                            // Bottom Sheet 내리기
-                            dialog.dismiss()
-
+                            }
+                            lastAction = e.action
+                            Log.d("result", "333")
                             return false
                         }
-
+                        override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                        }
                         override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
                         }
-                    })
+                    }) // End of bottomRecyclerView.addOnItemTouchListener
                     return true
                 } //End of OnQueryTextSubmit
 
+                fun airportSelected(rv: RecyclerView, e: MotionEvent) {
+                    Log.d("result", e.action.toString())
+
+                    val child = rv.findChildViewUnder(e.x, e.y)
+                    child.let {
+                        val position = rv.getChildAdapterPosition(it!!)
 
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    return false
+                        // 선택 공항 표시
+                        val selectedItem = airportCodeList[position]
+                        val name = selectedItem.name
+                        val code = selectedItem.code
+                        val selectedAirportText = name + "\n" + code
+                        cardView.flight_info_select_airport_btn.text = selectedAirportText
+
+                        // 운항 정보 불러오기
+                        flightIfnoViewModel.requestAPI(code,
+                            complete = {
+                                adapter = FlightInfoAdapter(it, selectedAirportText)
+                                recyclerView.adapter = adapter
+                                recyclerView.layoutManager = LinearLayoutManager(activity)
+
+                                // SearchView 보이기
+                                searchView.isVisible = true
+                            },
+                            fail = {
+                                Toast.makeText(context, "데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                                // 검색 결과가 없을 떄 리사이클러 뷰 결과 표시하지 않기
+                                recyclerView.adapter = FlightInfoAdapter(null, selectedAirportText)
+                                // SearchView 가리기
+                                searchView.isVisible = false
+                                textView.isVisible = true
+                                imageView.isVisible = true
+                            }
+                        )
+                        // Bottom Sheet 내리기
+                        dialog.dismiss()
+                    }
                 }
             })
             dialog.setContentView(bottomView)
