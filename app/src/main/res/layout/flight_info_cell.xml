@@ -8,6 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
+        android:foreground="?android:attr/selectableItemBackground"
+
         app:layout_constraintTop_toTopOf="parent"
 
         app:cardCornerRadius="10dp"
@@ -25,7 +27,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/flight_info_airline_text_view"
+                    android:id="@+id/flight_info_cell_airline_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -42,7 +44,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/flight_info_flightid_text_view"
+                    android:id="@+id/flight_info_cell_flightid_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -65,7 +67,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/flight_info_arrive_date_text_view"
+                    android:id="@+id/flight_info_cell_arrive_date_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -79,7 +81,7 @@
                     android:textColor="@color/blackGray" />
 
                 <TextView
-                    android:id="@+id/flight_info_arrive_time_text_view"
+                    android:id="@+id/flight_info_cell_arrive_time_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -125,7 +127,7 @@
 
 
                 <TextView
-                    android:id="@+id/flight_info_destination_text_view"
+                    android:id="@+id/flight_info_cell_destination_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

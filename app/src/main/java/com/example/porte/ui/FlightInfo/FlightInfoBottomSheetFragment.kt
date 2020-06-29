@@ -19,7 +19,7 @@ class FlightInfoBottomSheetFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_flight_info_bottom_sheet, container, false)
+        val root = inflater.inflate(R.layout.flight_info_airport_bottom_sheet, container, false)
         val searchView: SearchView = root.findViewById(R.id.flight_info_airport_search_view)
         Log.d("result", "Load!!!!")
 

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/flight_info_detail_card_view_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/flight_info_detail_airline_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#80c9c9c9"
+
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="대한항공"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/blackGray"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/flight_info_detail_flightid_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#80c9c9c9"
+
+                    android:paddingTop="4dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="KE5951Y"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/blackGray"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/flight_info_detail_arrive_date_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="2020 / 07 / 12"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/blackGray" />
+
+                <TextView
+                    android:id="@+id/flight_info_detail_arrive_time_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:paddingTop="4dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="12 : 19 도착"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/blackGray"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="인천\nICN"
+                    android:textAlignment="center"
+                    android:textColor="@color/blackGray" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.6"
+                    android:alpha="0.7"
+                    app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+
+                <TextView
+                    android:id="@+id/flight_info_detail_destination_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+
+                    android:paddingRight="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="인천\nICN"
+                    android:textAlignment="center"
+                    android:textColor="@color/blackGray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#50c9c9c9"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"/>
+
+            <TextView
+                android:id="@+id/flight_info_detail_terminal_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="제 1 터미널"
+                android:textAlignment="center"
+                android:textColor="@color/blackGray"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <!--체크인이 들어갈곳-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Check-In"
+                        android:textAlignment="center"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true"
+                        app:cardCornerRadius="10dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/flight_info_detail_checkin_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="65dp"
+                            android:background="#30c9c9c9"
+
+                            android:text="A01\n-\nc17"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:gravity="center"
+
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <!--탑승구가 들어갈곳-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="GATE"
+                        android:textAlignment="center"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true"
+                        app:cardCornerRadius="10dp">
+
+                        <TextView
+                            android:id="@+id/flight_info_detail_gate_text_view"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:background="#30c9c9c9"
+
+                            android:gravity="center"
+                            android:text="16"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/flight_info_detail_remark_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#80c9c9c9"
+
+                android:layout_marginTop="8dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+
+                android:text="탑승중"
+                android:textColor="@color/blackGray"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/flight_info_detail_add_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:text="내 항공권에 추가"
+        app:layout_constraintTop_toBottomOf="@id/flight_info_detail_card_view_top" />
+
+    <Button
+        android:id="@+id/flight_info_detail_close_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/flight_info_detail_add_btn"
+
+        android:text="닫기"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

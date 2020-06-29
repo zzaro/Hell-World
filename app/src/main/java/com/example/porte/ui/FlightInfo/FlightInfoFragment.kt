@@ -67,7 +67,7 @@ class FlightInfoFragment : Fragment(){
             imageView.isVisible = false
 
 
-            val bottomView = layoutInflater.inflate(R.layout.fragment_flight_info_bottom_sheet, null)
+            val bottomView = layoutInflater.inflate(R.layout.flight_info_airport_bottom_sheet, null)
             val dialog = BottomSheetDialog(this.context!!)
 
             val alertImageView: ImageView = bottomView.findViewById(R.id.flight_info_airport_alert_image_view)

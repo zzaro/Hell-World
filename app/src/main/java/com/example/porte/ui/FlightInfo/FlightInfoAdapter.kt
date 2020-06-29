@@ -1,29 +1,28 @@
 package com.example.porte.ui.FlightInfo
 
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filterable
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.porte.R
 import com.example.porte.ValueObject.FlightVO
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.flight_info_cell.view.*
-import kotlinx.android.synthetic.main.fragment_flight_info.view.*
-import java.util.*
-import java.util.logging.Filter
+import kotlinx.android.synthetic.main.flight_info_detail_bottom_sheet.*
 import kotlin.collections.ArrayList
-import kotlin.math.min
 
-class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): RecyclerView.Adapter<FlightInfoViewHolder>(), Filterable {
+class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): RecyclerView.Adapter<FlightInfoAdapter.FlightInfoViewHolder>(), Filterable {
 
     private val unFilteredList = data
     private var filteredList = data
+    private var parentView: View? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlightInfoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.flight_info_cell, parent, false)
+        parentView = view
         return FlightInfoViewHolder(view)
     }
 
@@ -39,7 +38,7 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
     override fun onBindViewHolder(holder: FlightInfoViewHolder, position: Int) {
         filteredList.let {
             holder.airline.text = it!![position].airline
-            holder.flightid.text = it[position].flightId
+            holder.flightId.text = it[position].flightId
             holder.destination.text = destination
 
             val scheduleDateTime = it[position].scheduleDateTime
@@ -51,6 +50,14 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
 
             holder.arriveDate.text = "${year} / ${month} / ${day}"
             holder.arriveTime.text = "${hour} : ${minute}" + "도착"
+
+            holder.selectAction(it[position],
+                holder.airline.text.toString(),
+                holder.flightId.text.toString(),
+                holder.destination.text.toString(),
+                holder.arriveDate.text.toString(),
+                holder.arriveTime.text.toString()
+                )
         }
     }
 
@@ -64,7 +71,7 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
                     var filteringList = ArrayList<FlightVO>()
                     if (unFilteredList != null) {
                         for (item in unFilteredList) {
-                            if (item.airline!!.contains(charString) || item.flightId!!.contains(charString)) filteringList.add(item)
+                            if (item.airline!!.contains(charString.toUpperCase()) || item.flightId!!.contains(charString.toUpperCase())) filteringList.add(item)
                         }
                     }
                     filteringList
@@ -82,24 +89,57 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
         }
     }
 
+    inner class FlightInfoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val airline = itemView.flight_info_cell_airline_text_view
+        val flightId = itemView.flight_info_cell_flightid_text_view
+        val arriveDate = itemView.flight_info_cell_arrive_date_text_view
+        val arriveTime = itemView.flight_info_cell_arrive_time_text_view
+        val destination = itemView.flight_info_cell_destination_text_view
 
-//    override fun getFilter(): Filter {
-//        return object : Filter() {
-//            override fun performFiltering(constraint: CharSequence?): FilterResults {
-//
-//            }
-//
-//            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-//
-//            }
-//        }
-//    }
+        fun selectAction(data: FlightVO,
+                         arlineParam: String,
+                         flightIdParam: String,
+                         destinationParam: String,
+                         arriveDateParam: String,
+                         arriveTimeParam: String
+                         ) {
+            itemView.setOnClickListener {
+                val dialog = BottomSheetDialog(parentView!!.context)
+                dialog.setContentView(R.layout.flight_info_detail_bottom_sheet)
+
+                val airline = dialog.flight_info_detail_airline_text_view
+                val flightId = dialog.flight_info_detail_flightid_text_view
+                val arriveDate = dialog.flight_info_detail_arrive_date_text_view
+                val arriveTime = dialog.flight_info_detail_arrive_time_text_view
+                val destination = dialog.flight_info_detail_destination_text_view
+                val checkIn = dialog.flight_info_detail_checkin_text_view
+                val gate = dialog.flight_info_detail_gate_text_view
+                val remark = dialog.flight_info_detail_remark_text_view
+                val terminal = dialog.flight_info_detail_terminal_text_view
+
+                airline.text = arlineParam
+                flightId.text = flightIdParam
+                destination.text = destinationParam
+                arriveDate.text = arriveDateParam
+                arriveTime.text = arriveTimeParam
+
+                gate.text = data.gatenumber ?: "-"
+                remark.text = data.remark ?: ""
+
+                var modifiedCheckIn = data.chkinrange?.replace(" ", "     ")
+                modifiedCheckIn =  modifiedCheckIn?.replace("-", "\n-\n")
+                checkIn.text = modifiedCheckIn
+
+                terminal.text = when(data.terminalid) {
+                    "P01" -> "제 1 터미널"
+                    "P02" -> "탑승동"
+                    "P03" -> "제 2 터미널"
+                    else -> ""
+                }
+
+               dialog.show()
+            }
+        }
+    }
 }
 
-class FlightInfoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    val airline = itemView.flight_info_airline_text_view
-    val flightid = itemView.flight_info_flightid_text_view
-    val arriveDate = itemView.flight_info_arrive_date_text_view
-    val arriveTime = itemView.flight_info_arrive_time_text_view
-    val destination = itemView.flight_info_destination_text_view
-}
