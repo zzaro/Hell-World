@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.porte.Util.ApiService
 import com.example.porte.Util.ApiUtil
 import com.example.porte.ValueObject.FlightResponse
+import com.example.porte.ValueObject.FlightVO
 import com.example.porte.ValueObject.ParkingLotResponse
 import com.example.porte.ValueObject.ParkingLotVO
 import com.example.porte.ui.parkingLotInfo.ParkingLotInfoViewModel
@@ -16,14 +17,14 @@ import retrofit2.Response
 
 class FlightInfoViewModel: ViewModel() {
 
-    fun requestAPI(complete: (() -> Unit)? = null, fail: (() -> Unit)? = null) {
-        ApiUtil.getFlightService(ApiService.Flight).getTop(SERVICE_KEY, "NRT")?.enqueue(object :
+    fun requestAPI(code: String, complete: ((List<FlightVO>) -> Unit), fail: (() -> Unit)) {
+        ApiUtil.getFlightService(ApiService.Flight).getTop(SERVICE_KEY, code)?.enqueue(object :
             Callback<FlightResponse> {
             override fun onFailure(call: Call<FlightResponse>, t: Throwable) {
                 Log.d("API", "Fail(Flight)")
                 Log.d("API", call.request().toString())
                 Log.d("API", "${t}")
-                fail?.let { it() }
+                fail()
             }
 
             override fun onResponse(
@@ -35,9 +36,8 @@ class FlightInfoViewModel: ViewModel() {
 
 
                 val resultList = response.body()!!.body.items.itemList
-                Log.d("API", resultList.toString())
 
-                complete?.let {it()}
+                complete(resultList)
             }
         })
     }

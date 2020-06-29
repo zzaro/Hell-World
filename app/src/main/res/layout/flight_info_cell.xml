@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/flight_info_airline_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#80c9c9c9"
+
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="대한항공"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/blackGray"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/flight_info_flightid_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#80c9c9c9"
+
+                    android:paddingTop="4dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="KE5951Y"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/blackGray"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/flight_info_arrive_date_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="2020 / 07 / 12"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/blackGray" />
+
+                <TextView
+                    android:id="@+id/flight_info_arrive_time_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:paddingTop="4dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="12 : 19 도착"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/blackGray"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="인천\nICN"
+                    android:textAlignment="center"
+                    android:textColor="@color/blackGray" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.6"
+                    android:alpha="0.7"
+                    app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+
+
+
+                <TextView
+                    android:id="@+id/flight_info_destination_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+
+                    android:paddingRight="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+
+                    android:text="인천\nICN"
+                    android:textAlignment="center"
+                    android:textColor="@color/blackGray" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

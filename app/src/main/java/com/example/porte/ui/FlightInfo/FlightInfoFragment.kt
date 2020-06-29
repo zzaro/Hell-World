@@ -1,6 +1,7 @@
 package com.example.porte.ui.FlightInfo
 
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,6 +40,7 @@ class FlightInfoFragment : Fragment(){
         val root = inflater.inflate(R.layout.fragment_flight_info, container, false)
         val cardView: CardView = root.findViewById(R.id.flight_info_card_view)
         val searchView: SearchView = root.findViewById(R.id.flight_info_flight_search_view)
+        val recyclerView: RecyclerView = root.findViewById(R.id.flight_info_recycler_view)
         val textView: TextView = root.findViewById(R.id.flight_info_text_view)
         val imageView: ImageView = root.findViewById(R.id.flight_info_image_view)
 
@@ -116,16 +118,34 @@ class FlightInfoFragment : Fragment(){
                             val child = rv.findChildViewUnder(e.x, e.y)
                             val position = rv.getChildAdapterPosition(child!!)
 
+                            // 선택 공항 표시
                             val selectedItem = airportCodeList[position]
                             val name = selectedItem.name
                             val code = selectedItem.code
-                            cardView.flight_info_select_airport_btn.text = name + "\n" + code
+                            val selectedAirportText = name + "\n" + code
+                            cardView.flight_info_select_airport_btn.text = selectedAirportText
 
+                            // 운항 정보 불러오기
+                            flightIfnoViewModel.requestAPI(code,
+                                complete = {
+                                    recyclerView.adapter = FlightInfoAdapter(it, selectedAirportText)
+                                    recyclerView.layoutManager = LinearLayoutManager(activity)
+
+                                    // SearchView 보이기
+                                    searchView.isVisible = true
+                                },
+                                fail = {
+                                    Toast.makeText(context, "데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                                    // 검색 결과가 없을 떄 리사이클러 뷰 결과 표시하지 않
+                                    recyclerView.adapter = FlightInfoAdapter(null, selectedAirportText)
+                                    // SearchView 가리기
+                                    searchView.isVisible = false
+                                    textView.isVisible = true
+                                    imageView.isVisible = true
+                                }
+                            )
                             // Bottom Sheet 내리기
                             dialog.dismiss()
-
-                            // SearchView 보이기
-                            searchView.isVisible = true
 
                             return false
                         }
@@ -160,12 +180,4 @@ class FlightInfoFragment : Fragment(){
         return root
     }
 
-
-    private fun setBottomDialotSheet() {
-
-    }
-
-    companion object {
-        val KEY = "FlightInfoFragment"
-    }
 }
