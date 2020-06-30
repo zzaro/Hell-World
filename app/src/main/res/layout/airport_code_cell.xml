@@ -13,42 +13,44 @@
 
         <TextView
             android:id="@+id/airport_code_cell_code_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingLeft="8dp"
+
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/airport_code_cell_country_city_text_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
 
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
 
-            android:textSize="17sp"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:id="@+id/airport_code_cell_country_city_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:gravity="center"
             android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/airport_code_cell_name_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
 
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingRight="8dp"
 
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:gravity="center"
             android:layout_gravity="center"/>

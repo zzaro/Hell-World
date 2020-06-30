@@ -49,7 +49,7 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
             val minute = scheduleDateTime?.substring(10, 12)
 
             holder.arriveDate.text = "${year} / ${month} / ${day}"
-            holder.arriveTime.text = "${hour} : ${minute}" + "도착"
+            holder.arriveTime.text = "${hour} : ${minute}" + " 출발"
 
             holder.selectAction(it[position],
                 holder.airline.text.toString(),

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.example.porte.MainActivity
@@ -22,6 +23,10 @@ class SignUp : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 상단 타이틀바 제거
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        supportActionBar?.hide()
+
         setContentView(R.layout.activity_sign_up)
 
         auth = FirebaseAuth.getInstance()

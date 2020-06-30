@@ -188,6 +188,7 @@
                             android:id="@+id/flight_info_detail_checkin_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="65dp"
+                            android:minWidth="65dp"
                             android:background="#30c9c9c9"
 
                             android:text="A01\n-\nc17"
@@ -195,8 +196,8 @@
                             android:textStyle="bold"
                             android:gravity="center"
 
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"/>
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"/>
 
                     </androidx.cardview.widget.CardView>
 
