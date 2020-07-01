@@ -12,29 +12,40 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.porte.ui.dashboard.DashboardFragment"
-        android:label="항공편검색"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_gateInfo"
+        android:name="com.example.porte.ui.gateInfo.GateInfoFragment"
+        android:label="게이트 복잡도 현황"
+        tools:layout="@layout/fragment_gate_info" >
+        <action
+            android:id="@+id/action_navigation_gateInfo_to_gateInfo23"
+            app:destination="@id/gateInfo23"
+            app:popUpTo="@id/navigation_gateInfo" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.porte.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_etc"
+        android:name="com.example.porte.ui.etc.EtcFragment"
+        android:label="기 타"
+        tools:layout="@layout/fragment_etc" />
     <fragment
         android:id="@+id/navigation_parkingLotInfo"
         android:name="com.example.porte.ui.parkingLotInfo.ParkingLotInfoFragment"
         android:label="주차장 정보"
         tools:layout="@layout/fragment_parking_lot_info" />
     <fragment
-        android:id="@+id/navigation_flightInfo"
-        android:name="com.example.porte.ui.FlightInfo.FlightInfoFragment"
-        android:label="fragment_flight_info"
-        tools:layout="@layout/fragment_flight_info" />
+        android:id="@+id/gateInfo23"
+        android:name="com.example.porte.ui.gateInfo.GateInfo2"
+        android:label="fragment_gate_info2"
+        tools:layout="@layout/fragment_gate_info2" />
+
     <fragment
         android:id="@+id/flightInfoBottomSheetFragment"
         android:name="com.example.porte.ui.FlightInfo.FlightInfoBottomSheetFragment"
         android:label="fragment_flight_info_bottom_sheet"
         tools:layout="@layout/flight_info_airport_bottom_sheet" />
+    <fragment
+        android:id="@+id/navigation_flightInfo"
+        android:name="com.example.porte.ui.FlightInfo.FlightInfoFragment"
+        android:label="fragment_flight_info"
+        tools:layout="@layout/fragment_flight_info" />
 </navigation>

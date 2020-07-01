@@ -46,9 +46,6 @@
             app:srcCompat="@drawable/t1_short" />
 
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/parkingLot_rv"
         android:overScrollMode="always"
@@ -65,6 +62,5 @@
         android:fadingEdge="horizontal"
         android:fadingEdgeLength="30dp"
         android:requiresFadingEdge="vertical"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
