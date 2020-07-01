@@ -37,4 +37,15 @@
         android:name="com.example.porte.ui.gateInfo.GateInfo2"
         android:label="fragment_gate_info2"
         tools:layout="@layout/fragment_gate_info2" />
+
+    <fragment
+        android:id="@+id/flightInfoBottomSheetFragment"
+        android:name="com.example.porte.ui.FlightInfo.FlightInfoBottomSheetFragment"
+        android:label="fragment_flight_info_bottom_sheet"
+        tools:layout="@layout/flight_info_airport_bottom_sheet" />
+    <fragment
+        android:id="@+id/navigation_flightInfo"
+        android:name="com.example.porte.ui.FlightInfo.FlightInfoFragment"
+        android:label="fragment_flight_info"
+        tools:layout="@layout/fragment_flight_info" />
 </navigation>

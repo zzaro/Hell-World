@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.signInUp.SignUp">
 
+
+    <VideoView
+        android:id="@+id/signUp_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#AA000000"/>
+
     <LinearLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
@@ -13,7 +24,8 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/submit_btn"
-        android:layout_marginBottom="32dp">
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp">
 
         <LinearLayout
             android:id="@+id/name_layout"
@@ -30,7 +42,11 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:text="이름"
-                android:textColor="@color/colorPrimaryDark"
+
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+
                 app:layout_constraintStart_toStartOf="@id/name_layout"
                 tools:layout_editor_absoluteY="44dp" />
 
@@ -39,9 +55,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+
                 android:hint="이름을 입력하세요."
                 android:inputType="textPersonName"
-                android:text=""
+                android:textColor="#c9c9c9"
+                android:textColorHint="#c9c9c9"
+                android:backgroundTint="#c9c9c9"
+
                 app:layout_constraintStart_toStartOf="@+id/name_layout"
                 android:layout_marginLeft="16dp"
                 tools:layout_editor_absoluteY="65dp" />
@@ -61,12 +81,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이메일"
-                android:textColor="@color/colorPrimaryDark"
 
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                tools:layout_editor_absoluteX="16dp"
 
-                tools:layout_editor_absoluteX="16dp" />
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -86,7 +108,11 @@
 
 
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginRight="8dp"
+
+                    android:textColor="#c9c9c9"
+                    android:textColorHint="#c9c9c9"
+                    android:backgroundTint="#c9c9c9"/>
 
                 <ImageView
                     android:id="@+id/email_confirmed_img"
@@ -128,12 +154,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="비밀번호"
-                android:textColor="@color/colorPrimaryDark"
 
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                tools:layout_editor_absoluteX="16dp"
 
-                tools:layout_editor_absoluteX="16dp" />
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -153,7 +181,11 @@
                     android:hint="비밀번호를 입력하세요."
 
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginRight="8dp"
+
+                    android:textColor="#c9c9c9"
+                    android:textColorHint="#c9c9c9"
+                    android:backgroundTint="#c9c9c9"/>
 
                 <ImageView
                     android:id="@+id/password_confirmed_img"
@@ -194,12 +226,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="비밀번호 확인"
-                android:textColor="@color/colorPrimaryDark"
 
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                tools:layout_editor_absoluteX="16dp"
 
-                tools:layout_editor_absoluteX="16dp" />
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -218,7 +252,10 @@
                     android:hint="비밀번호를 한번 더 입력하세요."
 
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginRight="8dp"
+                    android:textColor="#c9c9c9"
+                    android:textColorHint="#c9c9c9"
+                    android:backgroundTint="#c9c9c9"/>
 
                 <ImageView
                     android:id="@+id/password_verification_confirmed_img"
@@ -247,10 +284,26 @@
         </LinearLayout>
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/signUp_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:indeterminateTint="#c9c9c9"
+
+        android:visibility="invisible"/>
+
 
     <Button
         android:id="@+id/submit_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -258,8 +311,17 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="32dp"
 
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+
+        android:background="@drawable/radius"
+
         android:text="완료"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

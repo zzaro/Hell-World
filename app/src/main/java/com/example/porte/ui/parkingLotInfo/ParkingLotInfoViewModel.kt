@@ -1,11 +1,8 @@
 package com.example.porte.ui.parkingLotInfo
 
 import android.util.Log
-import android.widget.ImageView
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.porte.R
+import com.example.porte.Shared.SharedData
 import com.example.porte.Util.ApiService
 import com.example.porte.Util.ApiUtil
 import com.example.porte.ValueObject.ParkingLotResponse
@@ -22,7 +19,7 @@ typealias DetailParkingType = MutableList<ParkingLotVO>
 class ParkingLotInfoViewModel : ViewModel(){
 
 
-    var allParking: AllParkingType? = null
+
 
     fun requestAPI(complete: () -> Unit, fail: () -> Unit) {
         ApiUtil.getParkingLotService(ApiService.PARKING).getTop(SERVICE_KEY, PAGE_NO, NUM_OF_ROWS)?.enqueue(object :
@@ -75,7 +72,7 @@ class ParkingLotInfoViewModel : ViewModel(){
                     }
                 } // End of for statement
 
-                allParking = listOf(listOf(t1ShortTerm, t1LongTerm), listOf(t2ShortTerm, t2LongTerm))
+                SharedData.sharedParkingData = listOf(listOf(t1ShortTerm, t1LongTerm), listOf(t2ShortTerm, t2LongTerm))
                 complete()
             }
         })
