@@ -314,12 +314,12 @@
         android:layout_marginRight="32dp"
         android:layout_marginLeft="32dp"
 
-        android:background="@drawable/radius"
+        android:background="@drawable/sign_up_button"
 
         android:text="완료"
         android:enabled="false"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:textColor="@drawable/sign_up_textcolor"
+        android:textStyle="bold" />
 
 
 
