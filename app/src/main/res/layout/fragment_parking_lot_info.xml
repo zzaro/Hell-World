@@ -45,22 +45,21 @@
             app:srcCompat="@drawable/t1_short" />
 
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/parkingLot_rv"
-        android:overScrollMode="always"
+        android:id="@+id/gateInfo_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parkingLotImgView"
         android:fadingEdge="horizontal"
         android:fadingEdgeLength="30dp"
-        android:requiresFadingEdge="vertical"/>
+        android:overScrollMode="always"
+        android:requiresFadingEdge="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parkingLotImgView"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

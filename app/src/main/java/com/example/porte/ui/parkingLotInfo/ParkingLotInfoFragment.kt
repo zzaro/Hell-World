@@ -1,14 +1,11 @@
 package com.example.porte.ui.parkingLotInfo
 
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -35,7 +32,7 @@ class ParkingLotInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_parking_lot_info, container, false)
-        val recyclerView: RecyclerView = root.findViewById(R.id.parkingLot_rv)
+        val recyclerView: RecyclerView = root.findViewById(R.id.gateInfo_rv)
         val imageView: ImageView = root.findViewById(R.id.parkingLotImgView)
 
 
