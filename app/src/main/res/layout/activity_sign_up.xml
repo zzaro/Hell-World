@@ -27,6 +27,18 @@
         android:layout_marginBottom="32dp"
         android:layout_marginTop="32dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="32dp"
+
+            android:text="회원가입"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+
         <LinearLayout
             android:id="@+id/name_layout"
             android:layout_width="match_parent"
