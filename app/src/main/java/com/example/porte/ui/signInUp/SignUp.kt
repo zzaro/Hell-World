@@ -1,12 +1,16 @@
 package com.example.porte.ui.signInUp
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import android.widget.VideoView
+import androidx.core.view.isVisible
 import com.example.porte.MainActivity
 import com.example.porte.R
 import com.google.firebase.auth.FirebaseAuth
@@ -22,7 +26,21 @@ class SignUp : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 상단 타이틀바 제거
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        supportActionBar?.hide()
+
         setContentView(R.layout.activity_sign_up)
+
+
+        val videoView: VideoView = findViewById(R.id.signUp_video_view)
+        val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.porte_bg_video_blur)
+        videoView.setOnPreparedListener {
+            it.setLooping(true)
+        }
+        videoView.setVideoURI(videoUri)
+        videoView.start()
+
 
         auth = FirebaseAuth.getInstance()
 
@@ -107,25 +125,29 @@ class SignUp : AppCompatActivity() {
         password_verification_edit_tv.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 confirmPasswordVerification()
-                true
             }
             false
         }
 
 
         submit_btn.setOnClickListener {
+            signUp_progressBar.isVisible = true
+
             val email = email_edit_tv.text.toString()
             val password = password_edit_tv.text.toString()
 
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {task ->
                 if (task.isSuccessful) {
                     Log.d("AUTH", "회원가입 완료.")
-                    Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                    signUp_progressBar.isVisible = false
+                    Toast.makeText(this, "회원가입이 완료되었습니다.\n다시 로그인해주세요.", Toast.LENGTH_LONG).show()
+//                    val intent = Intent(this, MainActivity::class.java)
+//                    startActivity(intent)
+                    finish()
                 }
                 else {
                     Log.d("AUTH", "회원가입 실패.", task.exception)
+                    signUp_progressBar.isVisible = true
                     Toast.makeText(this, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                 }
             } // END OF auth.createUserWithEmailAndPassword
@@ -157,6 +179,12 @@ class SignUp : AppCompatActivity() {
             isPasswordVerificationConfirmed = false
         }
         checkAllEditConfirmed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
     }
 
 }

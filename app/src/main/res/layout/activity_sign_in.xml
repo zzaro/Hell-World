@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.signInUp.SignIn">
 
+
+
+    <VideoView
+        android:id="@+id/signIn_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#50000000">
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/textview_layout"
         android:layout_width="0dp"
@@ -23,52 +36,99 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:src="@drawable/logo_letter"
+            android:layout_marginBottom="24dp"/>
+
 
         <EditText
             android:id="@+id/email_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="아이디"
             android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:hint="이메일"
+            android:inputType="textEmailAddress"
+
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:backgroundTint="#FFFFFF"/>
 
         <EditText
             android:id="@+id/password_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:backgroundTint="#FFFFFF"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_layout">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
             android:id="@+id/signIn_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
 
-            android:text="로그인" />
+            android:focusable="false"
+
+            android:foreground="?android:attr/selectableItemBackground"
+            android:background="@drawable/radius"
+            android:text="로그인"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/signUp_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+
             android:layout_weight="1"
-            android:text="회원가입" />
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginBottom="8dp"
+
+            android:focusable="false"
+
+            android:foreground="?android:attr/selectableItemBackground"
+            android:background="@drawable/radius"
+            android:text="회원가입"
+            android:textColor="#FFFFFF"/>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/signIn_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:indeterminateTint="#c9c9c9"
+
+        android:visibility="invisible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

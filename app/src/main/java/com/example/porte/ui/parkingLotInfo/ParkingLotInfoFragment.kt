@@ -1,14 +1,11 @@
 package com.example.porte.ui.parkingLotInfo
 
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creageek.segmentedbutton.SegmentedButton
 import com.example.porte.R
+import com.example.porte.Shared.SharedData
 
 
 //import javax.security.auth.callback.Callback
@@ -63,15 +61,17 @@ class ParkingLotInfoFragment : Fragment() {
             }
         }
 
+        // 주차장 현황 API 호출
         parkingLotViewModel.requestAPI(
             complete = {
-                recyclerView.adapter = parkingLotViewModel.allParking?.first()?.let {ParkingLotCardAdapter(it) }
+                recyclerView.adapter = SharedData.sharedParkingData?.first()?.let {ParkingLotCardAdapter(it) }
                 recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
                 recyclerView.addOnScrollListener(scrollListener)
             },
             fail = {
                 Toast.makeText(context, "데이터를 불러오는데 문제가 발생했습니다.", Toast.LENGTH_SHORT).show()
-            })
+            }
+        )
 
 
 
@@ -93,13 +93,13 @@ class ParkingLotInfoFragment : Fragment() {
                 when (segment.text) {
                     "제1터미널" -> {
                         imageView.setImageResource(R.drawable.t1_short)
-                        recyclerView.adapter = parkingLotViewModel.allParking?.first()?.let { ParkingLotCardAdapter(it) }
+                        recyclerView.adapter = SharedData.sharedParkingData?.first()?.let { ParkingLotCardAdapter(it) }
                         recyclerView.addOnScrollListener(scrollListener)
                     }
 
                     "제2터미널" -> {
                         imageView.setImageResource(R.drawable.t2_long_short)
-                        recyclerView.adapter = parkingLotViewModel.allParking?.last()?.let { ParkingLotCardAdapter(it) }
+                        recyclerView.adapter = SharedData.sharedParkingData?.last()?.let { ParkingLotCardAdapter(it) }
                         recyclerView.removeOnScrollListener(scrollListener)
                     }
 
