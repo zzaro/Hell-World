@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filterable
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.porte.R
 import com.example.porte.ValueObject.FlightVO
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.flight_info_cell.view.*
 import kotlinx.android.synthetic.main.flight_info_detail_bottom_sheet.*
+import kotlinx.android.synthetic.main.flight_info_detail_bottom_sheet.view.*
 import kotlin.collections.ArrayList
 
 class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): RecyclerView.Adapter<FlightInfoAdapter.FlightInfoViewHolder>(), Filterable {
@@ -51,7 +51,7 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
             holder.arriveDate.text = "${year} / ${month} / ${day}"
             holder.arriveTime.text = "${hour} : ${minute}" + " 출발"
 
-            holder.selectAction(it[position],
+            holder.setDialog(it[position],
                 holder.airline.text.toString(),
                 holder.flightId.text.toString(),
                 holder.destination.text.toString(),
@@ -96,12 +96,12 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
         val arriveTime = itemView.flight_info_cell_arrive_time_text_view
         val destination = itemView.flight_info_cell_destination_text_view
 
-        fun selectAction(data: FlightVO,
-                         arlineParam: String,
-                         flightIdParam: String,
-                         destinationParam: String,
-                         arriveDateParam: String,
-                         arriveTimeParam: String
+        fun setDialog(data: FlightVO,
+                      arlineParam: String,
+                      flightIdParam: String,
+                      destinationParam: String,
+                      arriveDateParam: String,
+                      arriveTimeParam: String
                          ) {
             itemView.setOnClickListener {
                 val dialog = BottomSheetDialog(parentView!!.context)
@@ -116,6 +116,17 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
                 val gate = dialog.flight_info_detail_gate_text_view
                 val remark = dialog.flight_info_detail_remark_text_view
                 val terminal = dialog.flight_info_detail_terminal_text_view
+
+                val addFlightBtn = dialog.flight_info_detail_add_btn
+                val closeBtn = dialog.flight_info_detail_close_btn
+
+                addFlightBtn.setOnClickListener {
+
+                }
+
+                closeBtn.setOnClickListener {
+                    dialog.dismiss()
+                }
 
                 airline.text = arlineParam
                 flightId.text = flightIdParam
@@ -139,6 +150,8 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
 
                dialog.show()
             }
+
+
         }
     }
 }
