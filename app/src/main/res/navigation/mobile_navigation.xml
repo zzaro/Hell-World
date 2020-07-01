@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_gateInfo"
-        android:name="com.example.porte.ui.gateInfo.GateInfoFragment"
+        android:name="com.example.porte.ui.gateInfo.GateInfo"
         android:label="게이트 복잡도 현황"
         tools:layout="@layout/fragment_gate_info" >
         <action
@@ -48,4 +48,9 @@
         android:name="com.example.porte.ui.FlightInfo.FlightInfoFragment"
         android:label="fragment_flight_info"
         tools:layout="@layout/fragment_flight_info" />
+    <fragment
+        android:id="@+id/navigation_gateInfo_container"
+        android:name="com.example.porte.ui.gateInfo.GateInfoContainer"
+        android:label="fragment_gate_info_container"
+        tools:layout="@layout/fragment_gate_info_container" />
 </navigation>

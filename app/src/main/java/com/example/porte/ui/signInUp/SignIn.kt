@@ -39,12 +39,13 @@ class SignIn : AppCompatActivity() {
             val email = email_tv.text.toString()
             val password = password_tv.text.toString()
 
-            if (email.isNotEmpty() && email != null) {
-                if (password.isNotEmpty() && password != null) {
+            if (email.isNotEmpty()) {
+                if (password.isNotEmpty()) {
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) {task ->
                         if (task.isSuccessful) {
                             signIn_progressBar.isVisible = false
 
+                            //Todo : (김민석) User DB에 연결하기
                             val user = auth.currentUser
                             val intent = Intent(this, MainActivity::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -78,7 +79,7 @@ class SignIn : AppCompatActivity() {
 
     public override fun onStart() {
         super.onStart()
-        // Activity 시작 시 사용자가 로그인이 되어있는지 확인.
+        // Todo: (김민석) Activity 시작 시 사용자가 로그인이 되어있는지 확인.
         val currentUser = auth.currentUser
 
     }

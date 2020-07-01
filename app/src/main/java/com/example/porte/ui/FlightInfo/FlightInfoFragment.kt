@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_flight_info.view.*
  */
 class FlightInfoFragment : Fragment(){
 
+    //TODO: (김민석) 이 끔찍한 코드 클린 코드로 변경하기.
 
     val flightIfnoViewModel by lazy {
         ViewModelProvider(this).get(FlightInfoViewModel::class.java)

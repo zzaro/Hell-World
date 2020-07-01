@@ -12,7 +12,7 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_gateInfo"
+        android:id="@+id/navigation_gateInfo_container"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard" />
 

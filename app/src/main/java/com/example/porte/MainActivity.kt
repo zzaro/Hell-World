@@ -5,13 +5,9 @@ import android.view.Window
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.porte.ui.FlightInfo.FlightInfoFragment
 import com.example.porte.ui.etc.EtcFragment
-import com.example.porte.ui.gateInfo.GateInfoFragment
+import com.example.porte.ui.gateInfo.GateInfoContainer
 import com.example.porte.ui.home.HomeFragment
 import com.example.porte.ui.parkingLotInfo.ParkingLotInfoFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,7 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     private val parkingLotInfoFragment = ParkingLotInfoFragment()
     private val homeFragment = HomeFragment()
-    private val gateFragment = GateInfoFragment()
+//    private val gateFragment = GateInfoFragment()
+    private val gateFragment = GateInfoContainer()
     private val flightInfoFragment = FlightInfoFragment()
     private val etcFragment = EtcFragment()
     private val fragmentManager = supportFragmentManager
@@ -53,13 +50,10 @@ class MainActivity : AppCompatActivity() {
 
 
 //        val navController = findNavController(R.id.nav_host_fragment)
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_parkingLotInfo,
-            R.id.navigation_home,
-            R.id.navigation_gateInfo,
-            R.id.navigation_etc))
+
        // setupActionBarWithNavController(navController, appBarConfiguration)
        // navView.setupWithNavController(navController)
 //        val appBarConfiguration = AppBarConfiguration(setOf(
@@ -88,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.navigation_gateInfo -> {
+                R.id.navigation_gateInfo_container -> {
                     fragmentManager.beginTransaction().hide(activeFragment).show(gateFragment).commit()
                     activeFragment = gateFragment
                     true
