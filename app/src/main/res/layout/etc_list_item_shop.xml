@@ -66,7 +66,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/txt_shop_etc_info"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txt_etc_item_subject">
-                <ImageView
+                <Button
                     android:id="@+id/img_item_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
