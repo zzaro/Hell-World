@@ -22,7 +22,7 @@ class EtcFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_etc,container,false)
 
         val recycler1=root.findViewById<RecyclerView>(R.id.recycle_etc)
-        recycler1.adapter = EtcRecyclerAdapter()
+        recycler1.adapter = EtcRecyclerAdapter(this.context!!)
         recycler1.layoutManager = LinearLayoutManager(activity)
 
         return root

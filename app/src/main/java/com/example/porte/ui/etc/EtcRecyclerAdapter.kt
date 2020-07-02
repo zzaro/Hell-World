@@ -1,5 +1,8 @@
 package com.example.porte.ui.etc
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +12,7 @@ import kotlinx.android.synthetic.main.etc_list_item_banner.view.*
 import kotlinx.android.synthetic.main.etc_list_item_shop.view.*
 import java.lang.IllegalArgumentException
 
-class EtcRecyclerAdapter : RecyclerView.Adapter<EtcRecyclerAdapter.ItemViewHolder>() {
+class EtcRecyclerAdapter(val parentContext: Context) : RecyclerView.Adapter<EtcRecyclerAdapter.ItemViewHolder>() {
 
     override fun getItemCount() = EtcData.values().size
 
@@ -36,6 +39,11 @@ class EtcRecyclerAdapter : RecyclerView.Adapter<EtcRecyclerAdapter.ItemViewHolde
             }
             ITEM->{
                 holder.bindItem(EtcData.values()[position].etcContent as EtcItem)
+                holder.itemView.img_item_link.setOnClickListener {
+                    val selectedEtcItem = EtcData.values()[position].etcContent as EtcItem
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(selectedEtcItem.link))
+                    parentContext.startActivity(intent)
+                }
             }
         }
     }

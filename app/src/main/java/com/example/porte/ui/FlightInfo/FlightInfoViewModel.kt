@@ -36,7 +36,6 @@ class FlightInfoViewModel: ViewModel() {
 
 
                 val resultList = response.body()!!.body.items.itemList
-
                 complete(resultList)
             }
         })
