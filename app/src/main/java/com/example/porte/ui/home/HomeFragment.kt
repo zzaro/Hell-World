@@ -41,9 +41,9 @@ class HomeFragment : Fragment() {
 
         root.findViewById<Button>(R.id.home_buttom).setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                FirebaseAuth.getInstance().signOut()
                 dao.deleteAllUserInfo()
             }
+            FirebaseAuth.getInstance().signOut()
         }
 
 

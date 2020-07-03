@@ -13,8 +13,11 @@ interface UserInfoDAO {
     @Update
     fun updateUserInfo(vararg userInfo: UserInfoEntity)
 
-    @Delete
-    fun deleteAllUserInfo(vararg userInfo: UserInfoEntity)
+//    @Delete
+//    fun deleteAllUserInfo(vararg userInfo: UserInfoEntity)
+
+    @Query("DELETE FROM UserInfoEntity")
+    fun deleteAllUserInfo()
 
     @Query("DELETE FROM UserInfoEntity WHERE userID = :userID")
     fun deleteUserInfo(vararg userID: String)
@@ -26,14 +29,16 @@ interface UserFlightInfoDAO {
     fun insertUserFlightInfo(vararg userFlightInfo: UserFlightInfoEntity)
 
     @Query("SELECT * FROM UserFlightInfoEntity WHERE flightInfoIdx = :flightInfoIdx")
-    fun selectUserFlightInfo(flightInfoIdx: Long): UserFlightInfoEntity
+    fun selectUserFlightInfo(flightInfoIdx: String): UserFlightInfoEntity
 
     @Update
     fun updateUserFlightInfo(vararg userFlightInfo: UserFlightInfoEntity)
 
-    @Delete
-    fun deleteAllUserFlightInfo(vararg userFlightInfo: UserFlightInfoEntity)
+//    @Delete
+//    fun deleteAllUserFlightInfo(vararg userFlightInfo: UserFlightInfoEntity)
+    @Query("DELETE FROM UserFlightInfoEntity")
+    fun deleteAllUserFlightInfo()
 
     @Query("DELETE FROM UserFlightInfoEntity WHERE flightInfoIdx = :flightInfoIdx")
-    fun deleteUserFlightInfo(vararg flightInfoIdx: Long)
+    fun deleteUserFlightInfo(vararg flightInfoIdx: String)
 }

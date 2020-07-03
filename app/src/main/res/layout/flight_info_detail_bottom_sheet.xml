@@ -270,7 +270,7 @@
         android:layout_height="wrap_content"
 
 
-        android:text="내 항공권에 추가"
+        android:text="내 항공편으로 설정"
         app:layout_constraintTop_toBottomOf="@id/flight_info_detail_card_view_top" />
 
     <Button

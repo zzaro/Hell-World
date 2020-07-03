@@ -15,13 +15,12 @@ data class UserInfoEntity(
 
 @Entity(tableName = "UserFlightInfoEntity")
 data class UserFlightInfoEntity(
-    @PrimaryKey(autoGenerate = true)
-    var flightInfoIdx: Long? = null,
+    @PrimaryKey var flightInfoIdx: String,
     // 항공사
     var airline: String?,
 
     // 도착공항
-    var airport: String?,
+    var destination: String?,
 
     // 공항코드
     var airportcode: String?,
