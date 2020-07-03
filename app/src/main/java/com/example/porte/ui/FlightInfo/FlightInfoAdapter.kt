@@ -12,6 +12,7 @@ import com.creageek.segmentedbutton.orElse
 import com.example.porte.R
 import com.example.porte.Shared.UserFlightInfoDatabase
 import com.example.porte.Shared.UserFlightInfoEntity
+import com.example.porte.Util.DateTransferUtil
 import com.example.porte.ValueObject.FlightVO
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.flight_info_cell.view.*
@@ -50,14 +51,10 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
             holder.destination.text = destination
 
             val scheduleDateTime = it[position].scheduleDateTime
-            val year = scheduleDateTime?.substring(0, 4)
-            val month = scheduleDateTime?.substring(4, 6)
-            val day = scheduleDateTime?.substring(6, 8)
-            val hour = scheduleDateTime?.substring(8, 10)
-            val minute = scheduleDateTime?.substring(10, 12)
+            val date = scheduleDateTime?.let { it1 -> DateTransferUtil.changeStringToDate(it1) }
 
-            holder.arriveDate.text = "${year} / ${month} / ${day}"
-            holder.arriveTime.text = "${hour} : ${minute}" + " 출발"
+            holder.arriveDate.text = "${date?.get("year")} / ${date?.get("month")} / ${date?.get("day")}"
+            holder.arriveTime.text = "${date?.get("hour")} : ${date?.get("minute")}" + " 출발"
 
             holder.setDialog(it[position],
                 holder.airline.text.toString(),
@@ -155,7 +152,7 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
                         flightInfoIdx = data.flightId + data.scheduleDateTime,
                         flightId = data.flightId,
                         airline = data.airline,
-                        destination = data.airport,
+                        destination = destination.text.toString(),
                         airportcode = data.airportcode,
                         chkinrange = data.chkinrange,
                         scheduleDateTime = data.scheduleDateTime,

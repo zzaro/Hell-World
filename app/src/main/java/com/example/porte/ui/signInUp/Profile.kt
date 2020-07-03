@@ -86,7 +86,6 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
                 val intent = Intent(this, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 startActivity(intent)
             }
             else { //메인화면으로부터 온것이라면, 화면 닫기.

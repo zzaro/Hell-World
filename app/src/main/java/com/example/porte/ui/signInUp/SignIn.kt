@@ -11,12 +11,19 @@ import android.widget.VideoView
 import androidx.core.view.isVisible
 import com.example.porte.MainActivity
 import com.example.porte.R
+import com.example.porte.Shared.UserFlightInfoDatabase
+import com.example.porte.Shared.UserInfoDatabase
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignIn : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private val userDao by lazy { UserInfoDatabase.getDatabase(this).userInfoDAO() }
+    private val flightDao by lazy { UserFlightInfoDatabase.getDatabase(this).userFlightInfoDAO() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +33,6 @@ class SignIn : AppCompatActivity() {
         supportActionBar?.hide()
 
         setContentView(R.layout.activity_sign_in)
-
 
         auth = FirebaseAuth.getInstance()
 

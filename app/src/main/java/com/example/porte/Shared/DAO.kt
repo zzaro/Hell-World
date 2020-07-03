@@ -35,6 +35,9 @@ interface UserFlightInfoDAO {
     @Query("SELECT * FROM UserFlightInfoEntity WHERE flightInfoIdx = :flightInfoIdx")
     fun selectUserFlightInfo(flightInfoIdx: String): UserFlightInfoEntity
 
+    @Query("SELECT * FROM UserFlightInfoEntity")
+    fun selectAllUserFlightInfo(): LiveData<UserFlightInfoEntity>
+
     @Update
     fun updateUserFlightInfo(vararg userFlightInfo: UserFlightInfoEntity)
 
