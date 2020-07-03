@@ -1,5 +1,6 @@
 package com.example.porte.Shared
 
+import android.graphics.Bitmap
 import android.media.Image
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,7 +9,7 @@ import androidx.room.PrimaryKey
 data class UserInfoEntity(
     @PrimaryKey var userID: String,
     var userName: String,
-    var userImg: Image
+    var userImg: String?
 )
 
 

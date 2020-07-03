@@ -17,68 +17,71 @@
         android:layout_height="match_parent"
         android:background="#AA000000"/>
 
+    <TextView
+        android:id="@+id/signUp_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="48dp"
+
+        android:text="회원가입"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
     <LinearLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/submit_btn"
+        app:layout_constraintTop_toBottomOf="@id/signUp_title"
+        app:layout_constraintBottom_toTopOf="@id/signUp_submit_btn"
         android:layout_marginBottom="32dp"
-        android:layout_marginTop="32dp">
+        android:layout_marginTop="64dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+<!--        <LinearLayout-->
+<!--            android:id="@+id/name_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_weight="1">-->
 
-            android:layout_marginBottom="32dp"
+<!--            <TextView-->
+<!--                android:id="@+id/name_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="이름"-->
 
-            android:text="회원가입"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
+<!--                android:textSize="18sp"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:textStyle="bold"-->
 
-        <LinearLayout
-            android:id="@+id/name_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+<!--                app:layout_constraintStart_toStartOf="@id/name_layout"-->
+<!--                tools:layout_editor_absoluteY="44dp" />-->
 
-            <TextView
-                android:id="@+id/name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:text="이름"
+<!--            <EditText-->
+<!--                android:id="@+id/name_edit_tv"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:ems="10"-->
 
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
+<!--                android:hint="이름을 입력하세요."-->
+<!--                android:inputType="textPersonName"-->
+<!--                android:textColor="#c9c9c9"-->
+<!--                android:textColorHint="#c9c9c9"-->
+<!--                android:backgroundTint="#c9c9c9"-->
 
-                app:layout_constraintStart_toStartOf="@id/name_layout"
-                tools:layout_editor_absoluteY="44dp" />
+<!--                app:layout_constraintStart_toStartOf="@+id/name_layout"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                tools:layout_editor_absoluteY="65dp" />-->
 
-            <EditText
-                android:id="@+id/name_edit_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-
-                android:hint="이름을 입력하세요."
-                android:inputType="textPersonName"
-                android:textColor="#c9c9c9"
-                android:textColorHint="#c9c9c9"
-                android:backgroundTint="#c9c9c9"
-
-                app:layout_constraintStart_toStartOf="@+id/name_layout"
-                android:layout_marginLeft="16dp"
-                tools:layout_editor_absoluteY="65dp" />
-
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/email_layout"
@@ -314,7 +317,7 @@
 
 
     <Button
-        android:id="@+id/submit_btn"
+        android:id="@+id/signUp_submit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
