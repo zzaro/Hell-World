@@ -11,15 +11,14 @@ import android.widget.VideoView
 import androidx.core.view.isVisible
 import com.example.porte.MainActivity
 import com.example.porte.R
+import com.example.porte.Shared.UserInfoEntity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignIn : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +45,9 @@ class SignIn : AppCompatActivity() {
                             signIn_progressBar.isVisible = false
 
                             //Todo : (김민석) User DB에 연결하기
-                            val user = auth.currentUser
+                            val firbaseUserInfo = auth.currentUser
+//                            saveUserInfo(firbaseUserInfo!!, email)
+
                             val intent = Intent(this, MainActivity::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -95,4 +96,11 @@ class SignIn : AppCompatActivity() {
         videoView.setVideoURI(videoUri)
         videoView.start()
     }
+
+
+//    fun saveUserInfo(firbaseUserInfo: FirebaseUser, email: String) {
+//        val userInfo = UserInfoEntity(
+//            userID = firbaseUserInfo.email.toString()
+//        )
+//    }
 }
