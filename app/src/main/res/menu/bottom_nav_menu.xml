@@ -3,13 +3,9 @@
 
     <item
         android:id="@+id/navigation_parkingLotInfo"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/parking"
         android:title="주차정보" />
 
-    <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_gateInfo_container"
@@ -17,13 +13,21 @@
         android:title="@string/title_dashboard" />
 
     <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+
+    <item
+        android:id="@+id/navigation_flightInfo"
+        android:icon="@drawable/plane"
+        android:title="항공조회" />
+
+
+    <item
         android:id="@+id/navigation_etc"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard" />
 
-    <item
-        android:id="@+id/navigation_flightInfo"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
 
 </menu>

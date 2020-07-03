@@ -39,7 +39,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
 
-                android:background="@drawable/image_round_outline"/>
+                android:background="@drawable/image_round_outline_200"/>
         </LinearLayout>
 
 

@@ -34,12 +34,9 @@ class HomeFragment : Fragment() {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
 
-        root.findViewById<Button>(R.id.home_buttom).setOnClickListener {
+
+        root.findViewById<ImageView>(R.id.home_logout).setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 dao.deleteAllUserInfo()
             }
@@ -51,7 +48,9 @@ class HomeFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             Log.d("log", dao.selectUserInfo(FirebaseAuth.getInstance().currentUser?.email!!).userName)
             val stringImg = dao.selectUserInfo(FirebaseAuth.getInstance().currentUser?.email!!).userImg
-            root.findViewById<ImageView>(R.id.home_imageView).setImageBitmap(ImageTransferUtil.changeStirngToBitmap(stringImg!!))
+            val profileImageiew = root.findViewById<ImageView>(R.id.home_profile)
+            profileImageiew.setImageBitmap(ImageTransferUtil.changeStirngToBitmap(stringImg!!))
+            profileImageiew.clipToOutline = true
         }
 
 
