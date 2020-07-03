@@ -15,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.porte.MainActivity
 import com.example.porte.R
+import com.example.porte.Shared.UserFlightInfoDatabase
+import com.example.porte.Shared.UserFlightInfoEntity
 import com.example.porte.Shared.UserInfoDatabase
 import com.example.porte.Shared.UserInfoEntity
 import com.example.porte.Util.ImageTransferUtil
@@ -29,7 +31,8 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-    private val dao by lazy { UserInfoDatabase.getDatabase(requireContext()).userInfoDAO() }
+    private val userDao by lazy { UserInfoDatabase.getDatabase(requireContext()).userInfoDAO() }
+    private val flightDao by lazy { UserFlightInfoDatabase.getDatabase(requireContext()).userFlightInfoDAO() }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -49,7 +52,8 @@ class HomeFragment : Fragment() {
 
         logoutBtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                dao.deleteAllUserInfo()
+                userDao.deleteAllUserInfo()
+                flightDao.deleteAllUserFlightInfo()
             }
             FirebaseAuth.getInstance().signOut()
             Toast.makeText(requireContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
@@ -62,12 +66,13 @@ class HomeFragment : Fragment() {
 
         profileImageiew.setOnClickListener{
             val intent = Intent(requireContext(), Profile::class.java)
+            intent.putExtra("isFromSignIn", false)
             startActivity(intent)
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            Log.d("log", dao.selectUserInfo(FirebaseAuth.getInstance().currentUser?.email!!).userName)
-            val stringImg = dao.selectUserInfo(FirebaseAuth.getInstance().currentUser?.email!!).userImg
+            Log.d("log", userDao.selectUserInfo(FirebaseAuth.getInstance().currentUser?.email!!).userName)
+            val stringImg = userDao.selectUserInfo(FirebaseAuth.getInstance().currentUser?.email!!).userImg
             profileImageiew.setImageBitmap(ImageTransferUtil.changeStirngToBitmap(stringImg!!))
             profileImageiew.clipToOutline = true
         }

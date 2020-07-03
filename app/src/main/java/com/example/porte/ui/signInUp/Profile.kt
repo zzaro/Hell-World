@@ -4,13 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
-import android.view.View
 import android.view.Window
-import android.widget.ImageView
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.widget.addTextChangedListener
 import com.example.porte.MainActivity
 import com.example.porte.R
@@ -44,6 +40,7 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
 
         setContentView(R.layout.activity_profile)
 
+        val isFromSignIn = intent.getBooleanExtra("isFromSignIn", false)
         val submitBtn = profile_submit_btn
         val userNameTextView = profile_user_name_text_view
 
@@ -53,7 +50,20 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
             buildImagePicker()
         }
 
-        FirebaseUtil.getUserProfile(userNameTextView, userProfileImgView, this)
+        if (isFromSignIn) {
+            FirebaseUtil.getUserProfile(userNameTextView, userProfileImgView, this)
+        }
+        else {
+            CoroutineScope(Dispatchers.IO).launch {
+                val userInfo = dao.selectUserInfo(FirebaseAuth.getInstance().currentUser?.email.toString())
+
+                runOnUiThread {
+                    userProfileImgView.setImageBitmap(ImageTransferUtil.changeStirngToBitmap(userInfo.userImg!!))
+                    userNameTextView.setText(userInfo.userName)
+                }
+            }
+
+        }
 
 
         userNameTextView.addTextChangedListener {
@@ -71,10 +81,18 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
                 dao.insertUserInfo(userInfo)
             }
 
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            // 로그인 창으로부터 불러와졌다면, 메인화면 띄우기
+            if (isFromSignIn) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(intent)
+            }
+            else { //메인화면으로부터 온것이라면, 화면 닫기.
+                finish()
+            }
+
         }
     }
 

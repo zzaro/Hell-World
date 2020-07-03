@@ -1,5 +1,6 @@
 package com.example.porte.Shared
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -9,6 +10,9 @@ interface UserInfoDAO {
 
     @Query("SELECT * FROM UserInfoEntity WHERE userID = :userID")
     fun selectUserInfo(userID: String): UserInfoEntity
+
+    @Query("SELECT * FROM UserInfoEntity")
+    fun selectAllUserInfo(): LiveData<UserInfoEntity>
 
     @Update
     fun updateUserInfo(vararg userInfo: UserInfoEntity)

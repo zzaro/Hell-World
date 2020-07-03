@@ -50,6 +50,7 @@ class SignIn : AppCompatActivity() {
                             signIn_progressBar.isVisible = false
 
                             val intent = Intent(this, Profile::class.java)
+                            intent.putExtra("isFromSignIn", true)
                             startActivity(intent)
                         }
                         else {
