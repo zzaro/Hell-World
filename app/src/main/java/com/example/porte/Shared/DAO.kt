@@ -23,7 +23,7 @@ interface UserInfoDAO {
 @Dao
 interface UserFlightInfoDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserFlightInfo(vararg userFlightInfo: UserFlightInfoDAO)
+    fun insertUserFlightInfo(vararg userFlightInfo: UserFlightInfoEntity)
 
     @Query("SELECT * FROM UserFlightInfoEntity WHERE flightInfoIdx = :flightInfoIdx")
     fun selectUserFlightInfo(flightInfoIdx: Long): UserFlightInfoEntity
