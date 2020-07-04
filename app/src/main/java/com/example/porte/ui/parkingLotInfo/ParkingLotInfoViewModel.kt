@@ -73,6 +73,8 @@ class ParkingLotInfoViewModel : ViewModel(){
                 } // End of for statement
 
                 SharedData.sharedParkingData = listOf(listOf(t1ShortTerm, t1LongTerm), listOf(t2ShortTerm, t2LongTerm))
+                val allParkingList = listOf(listOf(t1ShortTerm, t1LongTerm), listOf(t2ShortTerm, t2LongTerm))
+                SharedData.setSharedParkingLiveData(allParkingList)
                 complete()
             }
         })

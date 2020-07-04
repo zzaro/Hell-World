@@ -3,10 +3,12 @@ package com.example.porte.ui.home
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,8 +24,10 @@ import com.example.porte.Util.ImageTransferUtil
 import com.example.porte.ValueObject.ParkingLotVO
 import com.example.porte.ui.signInUp.Profile
 import com.example.porte.ui.signInUp.SignIn
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.home_bottom_dialog.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,6 +43,8 @@ class HomeFragment : Fragment() {
     private val userDao by lazy { UserInfoDatabase.getDatabase(requireContext()).userInfoDAO() }
     private val flightDao by lazy { UserFlightInfoDatabase.getDatabase(requireContext()).userFlightInfoDAO() }
 
+    private lateinit var userFlightInfoEntity: UserFlightInfoEntity
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -51,6 +57,9 @@ class HomeFragment : Fragment() {
         val profileImageiew = root.findViewById<ImageView>(R.id.home_profile)
         val flightInfolayout = root.findViewById<LinearLayout>(R.id.home_flight_info_layout)
         val noflightInfoLayout = root.findViewById<LinearLayout>(R.id.home_no_flight_info_layout)
+        val summaryLayout = root.findViewById<LinearLayout>(R.id.home_summary_layout)
+        val gateSummaryLayout = root.findViewById<ConstraintLayout>(R.id.home_summary_gate_layout)
+        val parkingSummaryLayout = root.findViewById<LinearLayout>(R.id.home_summary_parking_layout)
         
         profileImageiew.clipToOutline = true
         noflightInfoLayout.bringToFront()
@@ -64,21 +73,61 @@ class HomeFragment : Fragment() {
 
         flightDao.selectAllUserFlightInfo().observe(viewLifecycleOwner, Observer {
             if (it != null) {
+                userFlightInfoEntity = it
+
                 noflightInfoLayout.isVisible = false
+                summaryLayout.isVisible = true
+
                 setFlightInfoCardView(root, it)
                 setGateSummary(root, it)
                 setPakringLotSummary(root, it)
+
             }
             else {
                 noflightInfoLayout.isVisible = true
+                summaryLayout.isVisible = false
             }
         })
 
+        SharedData.getSharedParkingLiveData().observe(viewLifecycleOwner, Observer {
+            if (::userFlightInfoEntity.isInitialized) {
+                setPakringLotSummary(root, userFlightInfoEntity)
+            }
+        })
+
+
 //        signOut()
+
+
+
+        flightInfolayout.setOnClickListener{
+            val dialog = BottomSheetDialog(requireContext())
+            dialog.setContentView(R.layout.home_bottom_dialog)
+
+            dialog.home_bottom_dialog_change_button.setOnClickListener {
+                mainActivity?.goToFlightSearch()
+                    dialog.dismiss()
+            }
+            dialog.home_bottom_dialog_delete_button.setOnClickListener {
+                CoroutineScope(Dispatchers.IO).launch {
+                    flightDao.deleteAllUserFlightInfo()
+                }
+                Toast.makeText(requireContext(), "항공편이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
 
         noflightInfoLayout.setOnClickListener{
             mainActivity?.goToFlightSearch()
 
+        }
+        gateSummaryLayout.setOnClickListener{
+            mainActivity?.goToGateInfo()
+        }
+
+        parkingSummaryLayout.setOnClickListener{
+            mainActivity?.goToParkingLotInfo()
         }
 
         logoutBtn.setOnClickListener {
@@ -149,6 +198,8 @@ class HomeFragment : Fragment() {
             "P03" -> "제 2 터미널"
             else -> ""
         }
+
+
     }
 
     fun setGateSummary(view: View, data: UserFlightInfoEntity) {
@@ -207,7 +258,7 @@ class HomeFragment : Fragment() {
         when(data.terminalid) {
             //제 2 터미널일 경우
             "P03" -> {
-                val data = SharedData.sharedParkingData?.last()
+                val data = SharedData.getSharedParkingLiveData().value?.last()
                 val short = data?.first()
                 val long = data?.last()
                 val mostEmptyShort = short?.maxBy { it.parkingarea.toInt() - it.parking.toInt() }
@@ -233,7 +284,7 @@ class HomeFragment : Fragment() {
             }
 
             else -> {
-                val data = SharedData.sharedParkingData?.first()
+                val data = SharedData.getSharedParkingLiveData().value?.first()
                 val short = data?.first()
                 val long = data?.last()
                 val mostEmptyShort = short?.maxBy { it.parkingarea.toInt() - it.parking.toInt() }

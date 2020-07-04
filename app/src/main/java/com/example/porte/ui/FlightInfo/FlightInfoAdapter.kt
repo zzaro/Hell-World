@@ -110,7 +110,7 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
             arriveTimeParam: String
         ) {
             itemView.setOnClickListener {
-                val dialog = BottomSheetDialog(parentView!!.context)
+                val dialog = BottomSheetDialog(parentView?.context!!)
                 dialog.setContentView(R.layout.flight_info_detail_bottom_sheet)
 
                 val airline = dialog.flight_info_detail_airline_text_view
@@ -124,7 +124,6 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
                 val terminal = dialog.flight_info_detail_terminal_text_view
 
                 val addFlightBtn = dialog.flight_info_detail_add_btn
-                val closeBtn = dialog.flight_info_detail_close_btn
 
                 airline.text = airlineParam
                 flightId.text = flightIdParam
@@ -168,10 +167,6 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
                         Log.d("log", dao.selectUserFlightInfo(data.flightId + data.scheduleDateTime).toString())
                     }
                     Toast.makeText(itemView.context, "내 항공편으로 설정했습니다", Toast.LENGTH_SHORT).show()
-                    dialog.dismiss()
-                }
-
-                closeBtn.setOnClickListener {
                     dialog.dismiss()
                 }
 

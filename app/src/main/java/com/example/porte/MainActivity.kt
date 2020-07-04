@@ -112,4 +112,16 @@ class MainActivity : AppCompatActivity() {
         nav_view.selectedItemId = R.id.navigation_flightInfo
     }
 
+    fun goToParkingLotInfo() {
+        fragmentManager.beginTransaction().hide(activeFragment).show(parkingLotInfoFragment).commit()
+        activeFragment = parkingLotInfoFragment
+        nav_view.selectedItemId = R.id.navigation_parkingLotInfo
+    }
+
+    fun goToGateInfo() {
+        fragmentManager.beginTransaction().hide(activeFragment).show(gateFragment).commit()
+        activeFragment = gateFragment
+        nav_view.selectedItemId = R.id.navigation_gateInfo_container
+    }
+
 }
