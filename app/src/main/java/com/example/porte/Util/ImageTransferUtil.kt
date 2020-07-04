@@ -12,7 +12,7 @@ object ImageTransferUtil {
     fun changeImageToString(imageView: ImageView): String {
         val bitmap = imageView.drawable.toBitmap()
         val stream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.JPEG, 10, stream)
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 20, stream)
         val imageBytes = stream.toByteArray()
         val userImageBase64String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
         return userImageBase64String

@@ -29,17 +29,13 @@ class FirebaseUtil {
         db.collection(userUID!!).document("userInfo").get()
             .addOnSuccessListener {
                 if (it.exists()) {
-                    Log.d("log", "result = ${it.data.toString()}")
-                    // 이름 가져오기
-                    if (it.data!!.get("auserName").toString() == "null") {
+                    if (it.data!!.get("userName").toString() == "null") {
                         val name = ""
                         userName.setText(name)
-                        Log.d("log", name)
                     }
                     else {
-                        val name = it.data!!.get("auserName").toString()
+                        val name = it.data!!.get("userName").toString()
                         userName.setText(name)
-                        Log.d("log", name)
                     }
 
                     // 프로필사진 디코딩
@@ -72,7 +68,7 @@ class FirebaseUtil {
 
     private fun mapData(userName: EditText, userImageData: String, success: () -> Unit) {
         val userInfo = hashMapOf(
-            "auserName" to userName.text.toString(),
+            "userName" to userName.text.toString(),
             "image" to userImageData
         )
 
