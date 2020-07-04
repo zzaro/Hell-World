@@ -8,7 +8,7 @@
     tools:context=".ui.gateInfo.GateInfo2">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/gateInfo_rv"
+        android:id="@+id/gateInfo2_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="1dp"
@@ -32,7 +32,7 @@
         android:layout_marginBottom="12dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/gateInfo_rv"
+        app:layout_constraintBottom_toTopOf="@+id/gateInfo2_rv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,6 @@
         android:text="제2 터미널"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/gateImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

@@ -19,7 +19,7 @@ import com.example.porte.R
 class GateInfoContainer : Fragment() {
 
     private val gate1 by lazy {
-        GateInfo()
+        GateInfo1()
     }
     private val gate2 by lazy {
         GateInfo2()

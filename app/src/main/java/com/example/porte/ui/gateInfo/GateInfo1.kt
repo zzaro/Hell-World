@@ -22,17 +22,17 @@ import com.example.porte.ui.parkingLotInfo.ParkingLotCardAdapter
 import com.example.porte.ui.parkingLotInfo.ParkingLotInfoViewModel
 import kotlinx.android.synthetic.main.fragment_gate_info.view.*
 
-class GateInfo2 : Fragment() {
-    val GateInfo2ViewModel by lazy {
-        ViewModelProvider(this).get(GateInfo2ViewModel::class.java)
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_gate_info2, container, false)
-        val recyclerView = root.findViewById<RecyclerView>(R.id.gateInfo2_rv)
+class GateInfo1 : Fragment() {
+        val GateInfo1ViewModel by lazy {
+                ViewModelProvider(this).get(GateInfo1ViewModel::class.java)
+        }
+        override fun onCreateView(
+                inflater: LayoutInflater,
+                container: ViewGroup?,
+                savedInstanceState: Bundle?
+        ): View? {
+                val root = inflater.inflate(R.layout.fragment_gate_info, container, false)
+                val recyclerView = root.findViewById<RecyclerView>(R.id.gateInfo1_rv)
 
 //                GateInfo1ViewModel.requestAPI(
 //                                complete = {
@@ -44,24 +44,24 @@ class GateInfo2 : Fragment() {
 //                                }
 //                        )
 
-        if(SharedData.sharedGate2Data == null)
-        {
-            GateInfo2ViewModel.requestAPI(
-                complete = {
-                    recyclerView.adapter = GateInfo2Adapter()
-                    recyclerView.layoutManager = LinearLayoutManager(activity)
-                },
-                fail = {
-                    Toast.makeText(context, "데이터를 불러오는데 문제가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                if(SharedData.sharedGate1Data == null)
+                {
+                        GateInfo1ViewModel.requestAPI(
+                                complete = {
+                                        recyclerView.adapter = GateInfo1Adapter()
+                                        recyclerView.layoutManager = LinearLayoutManager(activity)
+                                },
+                                fail = {
+                                        Toast.makeText(context, "데이터를 불러오는데 문제가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                                }
+                        )
                 }
-            )
-        }
-        else
-        {
-            recyclerView.adapter = GateInfo2Adapter()
-            recyclerView.layoutManager = LinearLayoutManager(activity)
-        }
+                else
+                {
+                        recyclerView.adapter = GateInfo1Adapter()
+                        recyclerView.layoutManager = LinearLayoutManager(activity)
+                }
 
-        return root
-    }
+                return root
+        }
 }
