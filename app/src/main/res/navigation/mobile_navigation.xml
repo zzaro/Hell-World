@@ -53,9 +53,4 @@
         android:name="com.example.porte.ui.gateInfo.GateInfoContainer"
         android:label="fragment_gate_info_container"
         tools:layout="@layout/fragment_gate_info_container" />
-    <fragment
-        android:id="@+id/fragment_splash"
-        android:name="com.example.porte.fragment_splash"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" />
 </navigation>
