@@ -31,12 +31,11 @@ class MainActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
 
-
         setContentView(R.layout.activity_main)
 
+        homeFragment.setMainActivity(this)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
         fragmentManager.beginTransaction().apply {
             add(R.id.nav_host_fragment, parkingLotInfoFragment).hide(parkingLotInfoFragment)
             add(R.id.nav_host_fragment, gateFragment).hide(gateFragment)
@@ -105,6 +104,12 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    fun goToFlightSearch() {
+        fragmentManager.beginTransaction().hide(activeFragment).show(flightInfoFragment).commit()
+        activeFragment = flightInfoFragment
+        nav_view.selectedItemId = R.id.navigation_flightInfo
     }
 
 }

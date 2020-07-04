@@ -7,6 +7,7 @@
     android:background="#FFFFFFFF">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/nav_view_wrapper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFFFFFF"
@@ -22,7 +23,7 @@
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFF9F9F9"
+            android:background="@color/cardView"
             app:menu="@menu/bottom_nav_menu" />
 
 <!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
@@ -52,7 +53,7 @@
 
         android:layout_marginTop="16dp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nav_view_wrapper"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
