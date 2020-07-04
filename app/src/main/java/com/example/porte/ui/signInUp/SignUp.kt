@@ -1,6 +1,5 @@
 package com.example.porte.ui.signInUp
 
-import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.core.view.isVisible
-import com.example.porte.MainActivity
 import com.example.porte.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -31,16 +29,7 @@ class SignUp : AppCompatActivity() {
         supportActionBar?.hide()
 
         setContentView(R.layout.activity_sign_up)
-
-
-        val videoView: VideoView = findViewById(R.id.signUp_video_view)
-        val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.porte_bg_video_blur)
-        videoView.setOnPreparedListener {
-            it.setLooping(true)
-        }
-        videoView.setVideoURI(videoUri)
-        videoView.start()
-
+        setBackgroundVideo()
 
         auth = FirebaseAuth.getInstance()
 
@@ -130,7 +119,7 @@ class SignUp : AppCompatActivity() {
         }
 
 
-        submit_btn.setOnClickListener {
+        signUp_submit_btn.setOnClickListener {
             signUp_progressBar.isVisible = true
 
             val email = email_edit_tv.text.toString()
@@ -154,14 +143,25 @@ class SignUp : AppCompatActivity() {
         } // END OF submit_btn.setOnClickListener
     } // END OF onCreate
 
+
+    fun setBackgroundVideo() {
+        val videoView: VideoView = findViewById(R.id.signUp_video_view)
+        val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.porte_bg_video_blur)
+        videoView.setOnPreparedListener {
+            it.setLooping(true)
+        }
+        videoView.setVideoURI(videoUri)
+        videoView.start()
+    }
+
     fun checkAllEditConfirmed() {
         if (isEmailConfirmed == true
             && isPasswordConfirmed == true
             && isPasswordVerificationConfirmed == true) {
-            submit_btn.isEnabled = true
+            signUp_submit_btn.isEnabled = true
         }
         else {
-            submit_btn.isEnabled = false
+            signUp_submit_btn.isEnabled = false
         }
     }
 
@@ -183,7 +183,6 @@ class SignUp : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
 
     }
 

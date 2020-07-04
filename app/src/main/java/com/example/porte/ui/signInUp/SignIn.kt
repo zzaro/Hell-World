@@ -18,9 +18,6 @@ class SignIn : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,6 +29,13 @@ class SignIn : AppCompatActivity() {
 
 
         auth = FirebaseAuth.getInstance()
+
+        if (auth.currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
 
         signIn_btn.setOnClickListener {
             signIn_progressBar.isVisible = true
@@ -45,11 +49,7 @@ class SignIn : AppCompatActivity() {
                         if (task.isSuccessful) {
                             signIn_progressBar.isVisible = false
 
-                            //Todo : (김민석) User DB에 연결하기
-                            val user = auth.currentUser
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            val intent = Intent(this, Profile::class.java)
                             startActivity(intent)
                         }
                         else {
