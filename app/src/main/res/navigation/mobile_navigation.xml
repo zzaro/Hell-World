@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_gateInfo"
-        android:name="com.example.porte.ui.gateInfo.GateInfo"
+        android:name="com.example.porte.ui.gateInfo.GateInfo1"
         android:label="게이트 복잡도 현황"
         tools:layout="@layout/fragment_gate_info" >
         <action
