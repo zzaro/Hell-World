@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.gateInfo.GateInfo">
+    tools:context=".ui.gateInfo.GateInfo1">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/gateInfo_rv"
+        android:id="@+id/gateInfo1_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="1dp"
@@ -29,7 +29,7 @@
         android:layout_marginBottom="12dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/gateInfo_rv"
+        app:layout_constraintBottom_toTopOf="@+id/gateInfo1_rv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
