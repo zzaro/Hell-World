@@ -80,6 +80,7 @@ class SignIn : AppCompatActivity() {
 
         signUp_btn.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
         }
     }
@@ -87,12 +88,12 @@ class SignIn : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         // Todo: (김민석) Activity 시작 시 사용자가 로그인이 되어있는지 확인.
-        val currentUser = auth.currentUser
-
+        auth.signOut()
     }
 
     override fun onResume() {
         super.onResume()
+        auth.signOut()
 
         val videoView: VideoView = findViewById(R.id.signIn_video_view)
         val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.porte_bg_video)

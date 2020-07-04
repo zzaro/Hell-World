@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Window
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
@@ -34,13 +35,15 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Log.d("log", FirebaseAuth.getInstance().currentUser?.uid)
+
         // 상단 타이틀바 제거
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
 
         setContentView(R.layout.activity_profile)
 
-        val isFromSignIn = intent.getBooleanExtra("isFromSignIn", false)
+        val isFromSignIn = intent.getBooleanExtra("isFromSignIn", true)
         val submitBtn = profile_submit_btn
         val userNameTextView = profile_user_name_text_view
 
@@ -51,7 +54,7 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
         }
 
         if (isFromSignIn) {
-            FirebaseUtil.getUserProfile(userNameTextView, userProfileImgView, this)
+            FirebaseUtil().getUserProfile(userNameTextView, userProfileImgView, this)
         }
         else {
             CoroutineScope(Dispatchers.IO).launch {
@@ -71,27 +74,27 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
         }
 
         submitBtn.setOnClickListener {
-            FirebaseUtil.setUserProfile(userNameTextView, userProfileImgView, this)
+            FirebaseUtil().setUserProfile(userNameTextView, userProfileImgView) {
 
-            userInfo.userID = FirebaseAuth.getInstance().currentUser?.email.toString()
-            userInfo.userName = userNameTextView.text.toString()
-            userInfo.userImg = ImageTransferUtil.changeImageToString(userProfileImgView)
+                userInfo.userID = FirebaseAuth.getInstance().currentUser?.email.toString()
+                userInfo.userName = userNameTextView.text.toString()
+                userInfo.userImg = ImageTransferUtil.changeImageToString(userProfileImgView)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                dao.insertUserInfo(userInfo)
+                CoroutineScope(Dispatchers.IO).launch {
+                    dao.insertUserInfo(userInfo)
+                }
+
+                // 로그인 창으로부터 불러와졌다면, 메인화면 띄우기
+                if (isFromSignIn) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+                else { //메인화면으로부터 온것이라면, 화면 닫기.
+                    finish()
+                }
             }
-
-            // 로그인 창으로부터 불러와졌다면, 메인화면 띄우기
-            if (isFromSignIn) {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
-            else { //메인화면으로부터 온것이라면, 화면 닫기.
-                finish()
-            }
-
         }
     }
 
