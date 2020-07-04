@@ -22,6 +22,7 @@ import com.example.porte.Shared.UserInfoDatabase
 import com.example.porte.Util.DateTransferUtil
 import com.example.porte.Util.ImageTransferUtil
 import com.example.porte.ValueObject.ParkingLotVO
+import com.example.porte.ui.gateInfo.GateInfo1Adapter
 import com.example.porte.ui.signInUp.Profile
 import com.example.porte.ui.signInUp.SignIn
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -95,8 +96,17 @@ class HomeFragment : Fragment() {
             }
         })
 
+        SharedData.getSharedGate1LiveData().observe(viewLifecycleOwner, Observer {
+            if (::userFlightInfoEntity.isInitialized) {
+                setGateSummary(root, userFlightInfoEntity)
+            }
+        })
 
-//        signOut()
+        SharedData.getSharedGate2LiveData().observe(viewLifecycleOwner, Observer {
+            if (::userFlightInfoEntity.isInitialized) {
+                setGateSummary(root, userFlightInfoEntity)
+            }
+        })
 
 
 
@@ -140,7 +150,6 @@ class HomeFragment : Fragment() {
             intent.putExtra("isFromSignIn", false)
             startActivity(intent)
         }
-
 
         return root
     }
@@ -231,6 +240,11 @@ class HomeFragment : Fragment() {
                 gate6CardView.alpha = 0.0F
                 gate2.text = "1"
                 gate5.text = "2"
+
+                SharedData.getSharedGate2LiveData().observe(viewLifecycleOwner, Observer {
+                    it?.gate1?.let { it1 -> setGateStatus(it1, gate2Status) }
+                    it?.gate2?.let { it2 -> setGateStatus(it2, gate5Status) }
+                })
             }
 
             else -> {
@@ -241,7 +255,49 @@ class HomeFragment : Fragment() {
                 gate6CardView.alpha = 1.0F
                 gate2.text = "2"
                 gate5.text = "5"
+
+                SharedData.getSharedGate1LiveData().observe(viewLifecycleOwner, Observer {
+                    it?.gate1?.let { it1 -> setGateStatus(it1, gate1Status) }
+                    it?.gate2?.let { it2 -> setGateStatus(it2, gate2Status) }
+                    it?.gate3?.let { it3 -> setGateStatus(it3, gate3Status) }
+                    it?.gate4?.let { it4 -> setGateStatus(it4, gate4Status) }
+                    it?.gate5?.let { it5 -> setGateStatus(it5, gate5Status) }
+                    it?.gate6?.let { it6 -> setGateStatus(it6, gate6Status) }
+                })
             }
+        }
+    }
+
+    fun setGateStatus(gateStateNum: String, holder: TextView) {
+        if(gateStateNum=="0")
+        {
+            holder.text = "원활"
+            holder.setTextColor(Color.rgb(63,164,253))
+        }
+        else if(gateStateNum=="1")
+        {
+            holder.text = "보통"
+            holder.setTextColor(Color.rgb(25,199,66))
+        }
+        else if(gateStateNum=="2")
+        {
+            holder.text = "혼잡"
+            holder.setTextColor(Color.rgb(250,152,94))
+        }
+        else if(gateStateNum=="3")
+        {
+            holder.text = "매우혼잡"
+            holder.setTextColor(Color.rgb(252,82,91))
+        }
+        else if(gateStateNum=="9")
+        {
+            holder.text = "CLOSED"
+            holder.setTextColor(Color.rgb(127,127,127))
+        }
+        else
+        {
+            holder.text = "공사중"
+            holder.setTextColor(Color.rgb(127,127,127))
         }
     }
 

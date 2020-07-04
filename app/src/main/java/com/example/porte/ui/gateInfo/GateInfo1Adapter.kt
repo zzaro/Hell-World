@@ -32,52 +32,52 @@ class GateInfo1Adapter():RecyclerView.Adapter<GateInfo1Adapter.GateInfoViewHolde
 
         if(position==0)
         {
-            var state_num_filter: String = SharedData.sharedGate1Data!!.gate1.toString()
+            var state_num_filter: String = SharedData.getSharedGate1LiveData().value?.gate1.toString()
             filter(state_num_filter, holder)
             holder.gate_num.text = "GATE1"
-            holder.wait_num.text = SharedData.sharedGate1Data!!.gateinfo1.toString()
+            holder.wait_num.text = SharedData.getSharedGate1LiveData().value?.gateinfo1.toString()
 
             //holder.state.text = state_num_filter
 
         }
         else if(position==1)
         {
-            var state_num_filter: String = SharedData.sharedGate1Data!!.gate2.toString()
+            var state_num_filter: String = SharedData.getSharedGate1LiveData().value?.gate2.toString()
             filter(state_num_filter, holder)
             holder.gate_num.text = "GATE2"
-            holder.wait_num.text = SharedData.sharedGate1Data!!.gateinfo2.toString()
+            holder.wait_num.text = SharedData.getSharedGate1LiveData().value?.gateinfo2.toString()
            // holder.state.text = state_num_filter
         }
         else if(position==2)
         {
-            var state_num_filter: String = SharedData.sharedGate1Data!!.gate3.toString()
+            var state_num_filter: String = SharedData.getSharedGate1LiveData().value?.gate3.toString()
             filter(state_num_filter, holder)
             holder.gate_num.text = "GATE3"
-            holder.wait_num.text = SharedData.sharedGate1Data!!.gateinfo3.toString()
+            holder.wait_num.text = SharedData.getSharedGate1LiveData().value?.gateinfo3.toString()
             //holder.state.text = state_num_filter
         }
         else if(position==3)
         {
-            var state_num_filter: String = SharedData.sharedGate1Data!!.gate4.toString()
+            var state_num_filter: String = SharedData.getSharedGate1LiveData().value?.gate4.toString()
             filter(state_num_filter, holder)
             holder.gate_num.text = "GATE4"
-            holder.wait_num.text = SharedData.sharedGate1Data!!.gateinfo4.toString()
+            holder.wait_num.text = SharedData.getSharedGate1LiveData().value?.gateinfo4.toString()
             //holder.state.text = state_num_filter
         }
         else if(position==4)
         {
-            var state_num_filter: String = SharedData.sharedGate1Data!!.gate5.toString()
+            var state_num_filter: String = SharedData.getSharedGate1LiveData().value?.gate5.toString()
             filter(state_num_filter, holder)
             holder.gate_num.text = "GATE5"
-            holder.wait_num.text = SharedData.sharedGate1Data!!.gateinfo5.toString()
+            holder.wait_num.text = SharedData.getSharedGate1LiveData().value?.gateinfo5.toString()
             //holder.state.text = state_num_filter
         }
         else if(position==5)
         {
-            var state_num_filter: String = SharedData.sharedGate1Data!!.gate6.toString()
+            var state_num_filter: String = SharedData.getSharedGate1LiveData().value?.gate6.toString()
             filter(state_num_filter, holder)
             holder.gate_num.text = "GATE6"
-            holder.wait_num.text = SharedData.sharedGate1Data!!.gateinfo6.toString()
+            holder.wait_num.text = SharedData.getSharedGate1LiveData().value?.gateinfo6.toString()
             //holder.state.text = state_num_filter
         }
     }

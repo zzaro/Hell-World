@@ -9,8 +9,8 @@
 
     <item
         android:id="@+id/navigation_gateInfo_container"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/gate"
+        android:title="출국장" />
 
     <item
         android:id="@+id/navigation_home"
@@ -26,8 +26,8 @@
 
     <item
         android:id="@+id/navigation_etc"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/ic_menu_black_24dp"
+        android:title="기타" />
 
 
 </menu>

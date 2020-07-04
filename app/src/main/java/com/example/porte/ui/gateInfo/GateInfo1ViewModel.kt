@@ -34,7 +34,7 @@ class GateInfo1ViewModel: ViewModel() {
 
                 val resultList = response.body()!!.body.departureitems.itemList
                 Log.d("API_s",resultList.toString())
-                SharedData.sharedGate1Data = resultList
+                SharedData.setSharedGate1LiveData(resultList)
                 complete(resultList)
 
             }

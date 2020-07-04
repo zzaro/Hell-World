@@ -44,7 +44,7 @@ class GateInfo1 : Fragment() {
 //                                }
 //                        )
 
-                if(SharedData.sharedGate1Data == null)
+                if(SharedData.getSharedGate1LiveData().value == null)
                 {
                         GateInfo1ViewModel.requestAPI(
                                 complete = {

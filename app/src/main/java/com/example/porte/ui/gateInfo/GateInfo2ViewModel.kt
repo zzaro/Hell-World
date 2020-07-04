@@ -15,12 +15,12 @@ import retrofit2.Response
 class GateInfo2ViewModel: ViewModel() {
     fun requestAPI(complete: ((DepartureVO)-> Unit), fail: (()->Unit)){
         ApiUtil.getDepartureService(ApiService.DEPARTURE).getTop(SERVICE_KEY, "2")?.enqueue(object :
-            Callback<DepartureResponse>{
+            Callback<DepartureResponse> {
             override fun onFailure(call: Call<DepartureResponse>, t: Throwable) {
                 Log.d("API", "Fail(Departure)")
                 Log.d("API", call.request().toString())
-                Log.d("API","${t}")
-                Log.d("API_s",t.toString())
+                Log.d("API", "${t}")
+                Log.d("API_s", t.toString())
                 fail()
             }
 
@@ -33,13 +33,12 @@ class GateInfo2ViewModel: ViewModel() {
 
 
                 val resultList = response.body()!!.body.departureitems.itemList
-                Log.d("API_s",resultList.toString())
-                SharedData.sharedGate2Data = resultList
+                Log.d("API_s", resultList.toString())
+                SharedData.setSharedGate2LiveData(resultList)
                 complete(resultList)
 
             }
-        }
-        )
+        })
     }
 
     companion object{

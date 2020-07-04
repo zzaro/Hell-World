@@ -44,12 +44,12 @@ class GateInfo2 : Fragment() {
 //                                }
 //                        )
 
-        if(SharedData.sharedGate2Data == null)
+        if(SharedData.getSharedGate2LiveData().value == null)
         {
             GateInfo2ViewModel.requestAPI(
                 complete = {
                     recyclerView.adapter = GateInfo2Adapter()
-                    recyclerView.layoutManager = LinearLayoutManager(activity)
+                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 },
                 fail = {
                     Toast.makeText(context, "데이터를 불러오는데 문제가 발생했습니다.", Toast.LENGTH_SHORT).show()
@@ -59,7 +59,7 @@ class GateInfo2 : Fragment() {
         else
         {
             recyclerView.adapter = GateInfo2Adapter()
-            recyclerView.layoutManager = LinearLayoutManager(activity)
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
 
         return root

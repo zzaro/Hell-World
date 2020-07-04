@@ -32,6 +32,7 @@ class GateInfoContainer : Fragment() {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_gate_info_container, container, false)
 
+        setChildFragment(gate2)
         setChildFragment(gate1)
 
         // Segment Control 초기화
@@ -51,11 +52,11 @@ class GateInfoContainer : Fragment() {
                 Log.d("creageek:segmented", "Segment ${segment.text} checked")
                 when (segment.text) {
                     "제1터미널" -> {
-                        setChildFragment(gate1);
+                        setChildFragment(gate1)
                     }
 
                     "제2터미널" -> {
-                        setChildFragment(gate2);
+                        setChildFragment(gate2)
                     }
 
                 }

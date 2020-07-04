@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -64,7 +65,10 @@ class ParkingLotInfoFragment : Fragment() {
         // 주차장 현황 API 호출
         parkingLotViewModel.requestAPI(
             complete = {
-                recyclerView.adapter = SharedData.sharedParkingData?.first()?.let {ParkingLotCardAdapter(it) }
+                SharedData.getSharedParkingLiveData().observe(viewLifecycleOwner, Observer {
+                    recyclerView.adapter = it?.first()?.let { it1 -> ParkingLotCardAdapter(it1) }
+                })
+//                recyclerView.adapter = SharedData.getSharedParkingLiveData().value?.first()?.let {ParkingLotCardAdapter(it) }
                 recyclerView.layoutManager = LinearLayoutManager(this@ParkingLotInfoFragment.context)
                 recyclerView.addOnScrollListener(scrollListener)
             },
@@ -93,13 +97,19 @@ class ParkingLotInfoFragment : Fragment() {
                 when (segment.text) {
                     "제1터미널" -> {
                         imageView.setImageResource(R.drawable.t1_short)
-                        recyclerView.adapter = SharedData.sharedParkingData?.first()?.let { ParkingLotCardAdapter(it) }
+                        SharedData.getSharedParkingLiveData().observe(viewLifecycleOwner, Observer {
+                            recyclerView.adapter = it?.first()?.let { it1 -> ParkingLotCardAdapter(it1) }
+                        })
+//                        recyclerView.adapter = SharedData.getSharedParkingLiveData().value?.first()?.let { ParkingLotCardAdapter(it) }
                         recyclerView.addOnScrollListener(scrollListener)
                     }
 
                     "제2터미널" -> {
                         imageView.setImageResource(R.drawable.t2_long_short)
-                        recyclerView.adapter = SharedData.sharedParkingData?.last()?.let { ParkingLotCardAdapter(it) }
+                        SharedData.getSharedParkingLiveData().observe(viewLifecycleOwner, Observer {
+                            recyclerView.adapter = it?.last()?.let { it1 -> ParkingLotCardAdapter(it1) }
+                        })
+//                        recyclerView.adapter = SharedData.getSharedParkingLiveData().value?.last()?.let { ParkingLotCardAdapter(it) }
                         recyclerView.removeOnScrollListener(scrollListener)
                     }
 

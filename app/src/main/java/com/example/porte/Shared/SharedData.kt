@@ -10,9 +10,6 @@ import com.example.porte.ValueObject.DepartureVO
 import com.example.porte.ui.parkingLotInfo.AllParkingType
 
 object SharedData {
-    var sharedParkingData: AllParkingType? = null
-
-
     val sharedParkingLiveData = MutableLiveData<AllParkingType?>().apply { postValue(null) }
     fun getSharedParkingLiveData(): LiveData<AllParkingType?> = sharedParkingLiveData
     fun setSharedParkingLiveData(data: AllParkingType?) {
@@ -21,8 +18,18 @@ object SharedData {
 
 
 //    var sharedParkingLastUpdate
-    var sharedGate1Data: DepartureVO? = null
+//    var sharedGate1Data: DepartureVO? = null
+    val sharedGate1LiveData = MutableLiveData<DepartureVO?>().apply { postValue(null) }
+    fun getSharedGate1LiveData(): LiveData<DepartureVO?> = sharedGate1LiveData
+    fun setSharedGate1LiveData(data: DepartureVO?) {
+        sharedGate1LiveData.postValue(data)
+    }
 
-    var sharedGate2Data: DepartureVO? = null
+//    var sharedGate2Data: DepartureVO? = null
 
+    val sharedGate2LiveData = MutableLiveData<DepartureVO?>().apply { postValue(null) }
+    fun getSharedGate2LiveData(): LiveData<DepartureVO?> = sharedGate2LiveData
+    fun setSharedGate2LiveData(data: DepartureVO?) {
+        sharedGate2LiveData.postValue(data)
+    }
 }
