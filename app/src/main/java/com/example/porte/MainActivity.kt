@@ -10,13 +10,13 @@ import com.example.porte.ui.etc.EtcFragment
 import com.example.porte.ui.gateInfo.GateInfoContainer
 import com.example.porte.ui.home.HomeFragment
 import com.example.porte.ui.parkingLotInfo.ParkingLotInfoFragment
+import io.alterac.blurkit.BlurKit
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val parkingLotInfoFragment = ParkingLotInfoFragment()
     private val homeFragment = HomeFragment()
-//    private val gateFragment = GateInfoFragment()
     private val gateFragment = GateInfoContainer()
     private val flightInfoFragment = FlightInfoFragment()
     private val etcFragment = EtcFragment()
@@ -34,12 +34,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        homeFragment.setMainActivity(this)
 
+
+
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
         fragmentManager.beginTransaction().apply {
             add(R.id.nav_host_fragment, parkingLotInfoFragment).hide(parkingLotInfoFragment)
-            add(R.id.nav_host_fragment, homeFragment).hide(homeFragment)
             add(R.id.nav_host_fragment, gateFragment).hide(gateFragment)
+            add(R.id.nav_host_fragment, homeFragment).hide(homeFragment)
             add(R.id.nav_host_fragment, flightInfoFragment).hide(flightInfoFragment)
             add(R.id.nav_host_fragment, etcFragment).hide(etcFragment)
         }.commit()
@@ -104,6 +107,24 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    fun goToFlightSearch() {
+        fragmentManager.beginTransaction().hide(activeFragment).show(flightInfoFragment).commit()
+        activeFragment = flightInfoFragment
+        nav_view.selectedItemId = R.id.navigation_flightInfo
+    }
+
+    fun goToParkingLotInfo() {
+        fragmentManager.beginTransaction().hide(activeFragment).show(parkingLotInfoFragment).commit()
+        activeFragment = parkingLotInfoFragment
+        nav_view.selectedItemId = R.id.navigation_parkingLotInfo
+    }
+
+    fun goToGateInfo() {
+        fragmentManager.beginTransaction().hide(activeFragment).show(gateFragment).commit()
+        activeFragment = gateFragment
+        nav_view.selectedItemId = R.id.navigation_gateInfo_container
     }
 
 }

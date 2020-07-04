@@ -73,6 +73,8 @@ class ParkingLotInfoViewModel : ViewModel(){
                 } // End of for statement
 
                 SharedData.sharedParkingData = listOf(listOf(t1ShortTerm, t1LongTerm), listOf(t2ShortTerm, t2LongTerm))
+                val allParkingList = listOf(listOf(t1ShortTerm, t1LongTerm), listOf(t2ShortTerm, t2LongTerm))
+                SharedData.setSharedParkingLiveData(allParkingList)
                 complete()
             }
         })
@@ -88,13 +90,13 @@ class ParkingLotInfoViewModel : ViewModel(){
 
 // 다음과 같은 구조로 이루어짐.
 //[
-//    [
-//        [
+//    [ //제 1 터미널
+//        [ // 단기
 //            ParkingLotVO(datetm=20200625161516.893, floor=T1 단기주차장지상층, parking=68, parkingarea=994),
 //            ParkingLotVO(datetm=20200625161516.893, floor=T1 단기주차장지하1층, parking=221, parkingarea=983),
 //            ParkingLotVO(datetm=20200625161516.893, floor=T1 단기주차장지하2층, parking=229, parkingarea=1339)
 //        ],
-//        [
+//        [ // 장기
 //            ParkingLotVO(datetm=20200625161516.894, floor=T1 장기 P1 주차장, parking=212, parkingarea=2762),
 //            ParkingLotVO(datetm=20200625161516.896, floor=T1 장기 P1 주차타워, parking=329, parkingarea=1023),
 //            ParkingLotVO(datetm=20200625161516.895, floor=T1 장기 P2 주차장, parking=89, parkingarea=2592),
@@ -103,13 +105,13 @@ class ParkingLotInfoViewModel : ViewModel(){
 //            ParkingLotVO(datetm=20200625161516.899, floor=T1 장기 P4 주차장, parking=0, parkingarea=0)
 //        ]
 //    ],
-//    [
-//        [
+//    [ // 제 2 터미널
+//        [ // 단기
 //            ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지상1층, parking=269, parkingarea=988),
 //            ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지상2층, parking=162, parkingarea=514),
 //            ParkingLotVO(datetm=20200625161516.891, floor=T2 단기주차장지하M층, parking=209, parkingarea=751)
 //        ],
-//        [
+//        [ // 장기
 //            ParkingLotVO(datetm=20200625161516.892, floor=T2 장기 주차장, parking=70, parkingarea=3898)
 //        ]
 //    ]

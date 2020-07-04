@@ -11,12 +11,19 @@ import android.widget.VideoView
 import androidx.core.view.isVisible
 import com.example.porte.MainActivity
 import com.example.porte.R
+import com.example.porte.Shared.UserFlightInfoDatabase
+import com.example.porte.Shared.UserInfoDatabase
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignIn : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private val userDao by lazy { UserInfoDatabase.getDatabase(this).userInfoDAO() }
+    private val flightDao by lazy { UserFlightInfoDatabase.getDatabase(this).userFlightInfoDAO() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +33,6 @@ class SignIn : AppCompatActivity() {
         supportActionBar?.hide()
 
         setContentView(R.layout.activity_sign_in)
-
 
         auth = FirebaseAuth.getInstance()
 
@@ -50,6 +56,7 @@ class SignIn : AppCompatActivity() {
                             signIn_progressBar.isVisible = false
 
                             val intent = Intent(this, Profile::class.java)
+                            intent.putExtra("isFromSignIn", true)
                             startActivity(intent)
                         }
                         else {
@@ -73,6 +80,7 @@ class SignIn : AppCompatActivity() {
 
         signUp_btn.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
         }
     }
@@ -80,8 +88,6 @@ class SignIn : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         // Todo: (김민석) Activity 시작 시 사용자가 로그인이 되어있는지 확인.
-        val currentUser = auth.currentUser
-
     }
 
     override fun onResume() {

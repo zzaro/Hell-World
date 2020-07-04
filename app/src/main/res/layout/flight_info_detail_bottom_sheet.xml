@@ -269,18 +269,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
+        android:background="@color/blue"
 
-        android:text="내 항공권에 추가"
+        android:text="내 항공편으로 설정"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/flight_info_detail_card_view_top" />
-
-    <Button
-        android:id="@+id/flight_info_detail_close_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintTop_toBottomOf="@id/flight_info_detail_add_btn"
-
-        android:text="닫기"/>
 
 
 

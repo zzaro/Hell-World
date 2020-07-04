@@ -15,36 +15,40 @@ import androidx.core.graphics.drawable.toBitmap
 import com.example.porte.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
 
-object FirebaseUtil {
-    private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance()
-    private val userUID = auth.currentUser!!.uid.toString()
+class FirebaseUtil {
+    private var db = FirebaseFirestore.getInstance()
+    private var auth = FirebaseAuth.getInstance()
+    private var userUID = auth.uid
 
     fun getUserProfile(userName: EditText, userImage: ImageView, context: Context) {
-        db.collection(userUID).document("userInfo").get()
+        db.collection(userUID!!).document("userInfo").get()
             .addOnSuccessListener {
+                if (it.exists()) {
+                    if (it.data!!.get("userName").toString() == "null") {
+                        val name = ""
+                        userName.setText(name)
+                    }
+                    else {
+                        val name = it.data!!.get("userName").toString()
+                        userName.setText(name)
+                    }
 
-                // 이름 가져오기
-                val name: String?
-                if (it["name"].toString() == "null") { name = "" }
-                else { name = it["name"].toString() }
-                userName.setText(name)
-
-                // 프로필사진 디코딩
-                val userImageBase64String = it["image"].toString()
-                Log.d("log", userImageBase64String)
-                if (userImageBase64String == "null") {
-                    val defaultProfile = context.resources.getDrawable(R.drawable.default_profile)
-                    userImage.setImageDrawable(defaultProfile)
-                    Log.d("log", "SetDefaultImage")
-                } else {
-                    val bitmap = ImageTransferUtil.changeStirngToBitmap(userImageBase64String)
-                    userImage.setImageBitmap(bitmap)
-                    Log.d("log", "SetUserImage")
+                    // 프로필사진 디코딩
+                    val userImageBase64String = it.data!!.get("image").toString()
+                    if (userImageBase64String == "null") {
+                        val defaultProfile = context.resources.getDrawable(R.drawable.default_profile)
+                        userImage.setImageDrawable(defaultProfile)
+                        Log.d("log", "SetDefaultImage")
+                    } else {
+                        val bitmap = ImageTransferUtil.changeStirngToBitmap(userImageBase64String)
+                        userImage.setImageBitmap(bitmap)
+                        Log.d("log", "SetUserImage")
+                    }
                 }
             }
             .addOnFailureListener {
@@ -52,24 +56,27 @@ object FirebaseUtil {
             }
     }
 
-    fun setUserProfile(userName: EditText, userImageView: ImageView, context: Context) {
+    fun setUserProfile(userName: EditText, userImageView: ImageView, success: () -> Unit) {
 
         // 프로필 사진 인코딩
         val userImageBase64String = ImageTransferUtil.changeImageToString(userImageView)
 
         Log.d("log", "userImage set = ${userImageBase64String}")
-        mapData(userName, userImageBase64String)
+        mapData(userName, userImageBase64String, success)
 
     }
 
-    private fun mapData(userName: EditText, userImageData: String) {
+    private fun mapData(userName: EditText, userImageData: String, success: () -> Unit) {
         val userInfo = hashMapOf(
-            "name" to userName.text.toString(),
+            "userName" to userName.text.toString(),
             "image" to userImageData
         )
 
 
-        db.collection(userUID).document("userInfo").set(userInfo)
+        db.collection(userUID!!).document("userInfo").set(userInfo)
+            .addOnSuccessListener {
+                success()
+            }
             .addOnFailureListener {
                 Log.d("Log", "ERROR: Firebase User Profile Upload Failed.")
             }
