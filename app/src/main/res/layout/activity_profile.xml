@@ -75,6 +75,8 @@
         android:layout_marginRight="32dp"
         android:layout_marginLeft="32dp"
 
+        android:focusable="false"
+
         android:background="@drawable/sign_up_button"
 
         android:text="완료"
