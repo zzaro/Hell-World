@@ -36,27 +36,6 @@ class FirebaseUtil {
                     val bitmap = ImageTransferUtil.changeStirngToBitmap(userImageBase64String)
                         userImage.setImageBitmap(bitmap)
                         Log.d("log", "SetUserImage")
-
-//                    if (it.data!!.get("userName").toString() == "null") {
-//                        val name = ""
-//                        userName.setText(name)
-//                    }
-//                    else {
-//                        val name = it.data!!.get("userName").toString()
-//                        userName.setText(name)
-//                    }
-//
-//                    // 프로필사진 디코딩
-//                    val userImageBase64String = it.data!!.get("image").toString()
-//                    if (userImageBase64String == "null") {
-//                        val defaultProfile = context.resources.getDrawable(R.drawable.default_profile)
-//                        userImage.setImageDrawable(defaultProfile)
-//                        Log.d("log", "SetDefaultImage")
-//                    } else {
-//                        val bitmap = ImageTransferUtil.changeStirngToBitmap(userImageBase64String)
-//                        userImage.setImageBitmap(bitmap)
-//                        Log.d("log", "SetUserImage")
-//                    }
                 }
                 else {
                     userName.setText("")

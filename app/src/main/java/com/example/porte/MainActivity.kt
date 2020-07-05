@@ -5,6 +5,7 @@ import android.view.Window
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.porte.Shared.SharedData
 import com.example.porte.ui.FlightInfo.FlightInfoFragment
 import com.example.porte.ui.etc.EtcFragment
 import com.example.porte.ui.gateInfo.GateInfoContainer
@@ -33,10 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-
         homeFragment.setMainActivity(this)
-
-
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         fragmentManager.beginTransaction().apply {
@@ -46,31 +44,11 @@ class MainActivity : AppCompatActivity() {
             add(R.id.nav_host_fragment, flightInfoFragment).hide(flightInfoFragment)
             add(R.id.nav_host_fragment, etcFragment).hide(etcFragment)
         }.commit()
-//        initListeners(navView)
         initListeners()
-//        navView.itemIconTintList = null
         navView.selectedItemId = R.id.navigation_home
 
-
-
-//        val navController = findNavController(R.id.nav_host_fragment)
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-
-       // setupActionBarWithNavController(navController, appBarConfiguration)
-       // navView.setupWithNavController(navController)
-//        val appBarConfiguration = AppBarConfiguration(setOf(
-//            R.id.navigation_parkingLotInfo,
-//            R.id.navigation_home,
-//            R.id.navigation_dashboard,
-//            R.id.navigation_flightInfo,
-//            R.id.navigation_notifications))
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
     }
 
-//    private fun initListeners(bottomNavView: BottomNavigationView) {
     private fun initListeners() {
         nav_view.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {

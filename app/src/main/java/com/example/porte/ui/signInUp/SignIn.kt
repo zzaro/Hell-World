@@ -11,6 +11,7 @@ import android.widget.VideoView
 import androidx.core.view.isVisible
 import com.example.porte.MainActivity
 import com.example.porte.R
+import com.example.porte.Shared.SharedData
 import com.example.porte.Shared.UserFlightInfoDatabase
 import com.example.porte.Shared.UserInfoDatabase
 import com.google.firebase.auth.FirebaseAuth
@@ -22,8 +23,8 @@ import kotlinx.coroutines.launch
 class SignIn : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private val userDao by lazy { UserInfoDatabase.getDatabase(this).userInfoDAO() }
-    private val flightDao by lazy { UserFlightInfoDatabase.getDatabase(this).userFlightInfoDAO() }
+//    private val userDao by lazy { UserInfoDatabase.getDatabase(this).userInfoDAO() }
+//    private val flightDao by lazy { UserFlightInfoDatabase.getDatabase(this).userFlightInfoDAO() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,8 @@ class SignIn : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        if (auth.currentUser != null) {
+
+        if (auth.currentUser != null ) {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

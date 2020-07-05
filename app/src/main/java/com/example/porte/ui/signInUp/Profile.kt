@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.porte.MainActivity
 import com.example.porte.R
+import com.example.porte.Shared.SharedData
 import com.example.porte.Shared.UserInfoDatabase
 import com.example.porte.Shared.UserInfoEntity
 import com.example.porte.Util.FirebaseUtil
@@ -74,6 +75,9 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
         }
 
         submitBtn.setOnClickListener {
+
+            it.isEnabled = false
+
             FirebaseUtil().setUserProfile(userNameTextView, userProfileImgView) {
 
                 userInfo.userID = FirebaseAuth.getInstance().currentUser?.email.toString()
@@ -131,6 +135,7 @@ class Profile : AppCompatActivity(), BottomSheetImagePicker.OnImagesSelectedList
             .requestTag("single")                       //tag can be used if multiple pickers are used
             .show(supportFragmentManager)
     }
+
 
 
 

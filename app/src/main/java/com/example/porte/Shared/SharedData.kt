@@ -17,15 +17,14 @@ object SharedData {
     }
 
 
-//    var sharedParkingLastUpdate
-//    var sharedGate1Data: DepartureVO? = null
+
     val sharedGate1LiveData = MutableLiveData<DepartureVO?>().apply { postValue(null) }
     fun getSharedGate1LiveData(): LiveData<DepartureVO?> = sharedGate1LiveData
     fun setSharedGate1LiveData(data: DepartureVO?) {
         sharedGate1LiveData.postValue(data)
     }
 
-//    var sharedGate2Data: DepartureVO? = null
+
 
     val sharedGate2LiveData = MutableLiveData<DepartureVO?>().apply { postValue(null) }
     fun getSharedGate2LiveData(): LiveData<DepartureVO?> = sharedGate2LiveData
