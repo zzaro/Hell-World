@@ -24,8 +24,6 @@ import kotlinx.coroutines.launch
 class SignIn : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private val userDao by lazy { UserInfoDatabase.getDatabase(this).userInfoDAO() }
-//    private val flightDao by lazy { UserFlightInfoDatabase.getDatabase(this).userFlightInfoDAO() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,28 +35,6 @@ class SignIn : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
 
         auth = FirebaseAuth.getInstance()
-
-
-        userDao.selectAllUserInfo().observe(this, Observer {
-            if (it != null && auth.currentUser != null) {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
-            else {
-                auth.signOut()
-            }
-        })
-
-
-//        if (auth.currentUser != null ) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            startActivity(intent)
-//        }
-
 
 
         signIn_btn.setOnClickListener {
