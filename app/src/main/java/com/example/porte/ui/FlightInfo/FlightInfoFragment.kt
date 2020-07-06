@@ -183,7 +183,7 @@ class FlightInfoFragment : Fragment(){
                         // 운항 정보 불러오기
                         flightIfnoViewModel.requestAPI(code,
                             complete = {
-                                adapter = FlightInfoAdapter(it, selectedAirportText)
+                                adapter = FlightInfoAdapter(it, root, selectedAirportText)
                                 recyclerView.adapter = adapter
                                 recyclerView.layoutManager = LinearLayoutManager(activity)
 
@@ -193,7 +193,7 @@ class FlightInfoFragment : Fragment(){
                             fail = {
                                 Toast.makeText(context, "데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                                 // 검색 결과가 없을 떄 리사이클러 뷰 결과 표시하지 않기
-                                recyclerView.adapter = FlightInfoAdapter(null, selectedAirportText)
+                                recyclerView.adapter = FlightInfoAdapter(null, root, selectedAirportText)
                                 // SearchView 가리기
                                 searchView.isVisible = false
                                 textView.isVisible = true

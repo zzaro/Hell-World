@@ -9,6 +9,7 @@ import android.view.Window
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import com.example.porte.MainActivity
 import com.example.porte.R
 import com.example.porte.Shared.SharedData
@@ -23,7 +24,7 @@ import kotlinx.coroutines.launch
 class SignIn : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-//    private val userDao by lazy { UserInfoDatabase.getDatabase(this).userInfoDAO() }
+    private val userDao by lazy { UserInfoDatabase.getDatabase(this).userInfoDAO() }
 //    private val flightDao by lazy { UserFlightInfoDatabase.getDatabase(this).userFlightInfoDAO() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,12 +39,27 @@ class SignIn : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        if (auth.currentUser != null ) {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
+        userDao.selectAllUserInfo().observe(this, Observer {
+            if (it != null && auth.currentUser != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            else {
+                auth.signOut()
+            }
+        })
+
+
+//        if (auth.currentUser != null ) {
+//            val intent = Intent(this, MainActivity::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(intent)
+//        }
+
+
 
         signIn_btn.setOnClickListener {
             signIn_progressBar.isVisible = true
@@ -87,10 +103,6 @@ class SignIn : AppCompatActivity() {
         }
     }
 
-    public override fun onStart() {
-        super.onStart()
-        // Todo: (김민석) Activity 시작 시 사용자가 로그인이 되어있는지 확인.
-    }
 
     override fun onResume() {
         super.onResume()

@@ -33,7 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
 }
 
 dependencies {
@@ -74,7 +73,7 @@ dependencies {
     //sqlite
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
 
-
+    // lifecycle
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     
@@ -89,8 +88,4 @@ dependencies {
 
     //BottomSheetImagePicker
     implementation 'com.kroegerama:bottomsheet-imagepicker:1.1.2'
-
-    // blur kit
-    implementation 'io.alterac.blurkit:blurkit:1.1.0'
-
 }

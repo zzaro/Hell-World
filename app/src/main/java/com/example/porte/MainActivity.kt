@@ -11,7 +11,6 @@ import com.example.porte.ui.etc.EtcFragment
 import com.example.porte.ui.gateInfo.GateInfoContainer
 import com.example.porte.ui.home.HomeFragment
 import com.example.porte.ui.parkingLotInfo.ParkingLotInfoFragment
-import io.alterac.blurkit.BlurKit
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

@@ -17,12 +17,13 @@ import com.example.porte.ValueObject.FlightVO
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.flight_info_cell.view.*
 import kotlinx.android.synthetic.main.flight_info_detail_bottom_sheet.*
+import kotlinx.android.synthetic.main.fragment_flight_info.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
-class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): RecyclerView.Adapter<FlightInfoAdapter.FlightInfoViewHolder>(), Filterable {
+class FlightInfoAdapter(val data: List<FlightVO>?, val rootView: View,val destination: String): RecyclerView.Adapter<FlightInfoAdapter.FlightInfoViewHolder>(), Filterable {
 
     private val unFilteredList = data
     private var filteredList = data
@@ -110,6 +111,8 @@ class FlightInfoAdapter(val data: List<FlightVO>?, val destination: String): Rec
             arriveTimeParam: String
         ) {
             itemView.setOnClickListener {
+                rootView.flight_info_flight_search_view.clearFocus()
+
                 val dialog = BottomSheetDialog(parentView?.context!!)
                 dialog.setContentView(R.layout.flight_info_detail_bottom_sheet)
 
